@@ -11,14 +11,18 @@ import API_BASE_URL from "./config.js";
 
 const ViewProducts = () => {
 
-    const {search} = useLocation()
+
+    let location = useLocation()
+    let productData = location.state;
+
+    //const {search} = useLocation()
     //console.log(search)
    
-    let params = new URLSearchParams(search); 
-    let arr = params.get("img").split(",")
+    //let params = new URLSearchParams(search); 
+    //let arr = params.get("img").split(",")
 
-    const [images, setImages] = useState(arr) 
-    const [currentImage, setCurrentImage] = useState(images[0])
+    // const [images, setImages] = useState(arr) 
+    // const [currentImage, setCurrentImage] = useState(images[0])
 
     useEffect(()=>{ 
       axios.get(`${API_BASE_URL}/viewproduct`, {
@@ -59,21 +63,21 @@ const ViewProducts = () => {
                     </ul>                   */}
 
                     <div className="preview-pic tab-content">
-                    <h3 className="product-title">{params.get("name")}</h3>
-                      <div className="tab-pane active" id="pic-1"><img src={currentImage} alt='img not support...'/></div>
+                    <h3 className="product-title">{productData.productname}</h3>
+                      {/* <div className="tab-pane active" id="pic-1"><img src={currentImage} alt='img not support...'/></div> */}
 
-                      <ul className="preview-thumbnail nav nav-tabs"> 
+                      {/* <ul className="preview-thumbnail nav nav-tabs"> 
                       {images.map((res,id)=>
 
                         <li key={id} ><img src={res} style={{cursor:'pointer'}} alt='img not support...' onClick={()=>setCurrentImage(res)}/></li>
                   
-                        )}
+                        )} */}
                       {/* <li onClick={()=>setImages(arr[0])}><img src={arr[0]} style={{cursor:'pointer'}} alt='img not support...' /></li>
                       <li onClick={()=>setImages(arr[1])} style={{cursor:'pointer'}}><img src={arr[1]} alt='img not support...' /></li>
                       <li onClick={()=>setImages(arr[2])} style={{cursor:'pointer'}}><img src={arr[2]} alt='img not support...' /></li>
                       <li onClick={()=>setImages(arr[3])} style={{cursor:'pointer'}}><img src={arr[3]} alt='img not support...' /></li>
                       <li onClick={()=>setImages(arr[4])} style={{cursor:'pointer'}}><img src={arr[4]} alt='img not support...' /></li> */}
-                    </ul> 
+                    {/* </ul>  */}
 
                     </div>
                      
@@ -82,8 +86,10 @@ const ViewProducts = () => {
 
                 <div className="details "> {/*col-md-6 */} 
                    
-                <h4 className="price">CATEGORY : <span>{params.get("type")}</span></h4> 
-                <h4 className="price">current price: <span class="material-symbols-outlined">currency_rupee</span><span>{params.get("price")}</span></h4> 
+                <h4 className="price">CATEGORY : <span>{productData.producttype}</span></h4> 
+                <h4 className="price">current price: <span class="material-symbols-outlined">currency_rupee</span><span>{productData.productprice}</span></h4> 
+                <h4 className="price">Stock In Hand: <span>{productData.items}</span></h4> 
+
 
                     <div className="rating">
                         <div className="stars">
@@ -100,7 +106,7 @@ const ViewProducts = () => {
 
                     <p>Description : </p>
                     <div className='card' style={{width:"100%", boxShadow:"0px 0px 3px 0px black"}}>
-                    <p className="product-description">{params.get("desc")}</p>
+                    <p className="product-description">{productData.productdesc}</p>
                     </div>
 
                     <Link to="/productlist" className='btn btn-ghost-primary' style={{width:"200px", margin:"auto", fontWeight:"bolder"}}>Back to List</Link>

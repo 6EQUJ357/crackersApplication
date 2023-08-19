@@ -52,18 +52,18 @@ const ReuseRegisterUser = (params) => {
         onSubmit : async(values, {resetForm})=>{
             //console.log("valuesfdbgb", values)
 
-            const formData = new FormData();
-            formData.append("userimg",values.userimg) 
-            formData.append("registerusergstno",values.registerusergstno)
-            formData.append("registerusername",values.registerusername)
-            formData.append("registeruseremail",values.registeruseremail)
-            formData.append("registerusernumber",values.registerusernumber)
-            formData.append("registeruseraddress",values.registeruseraddress)
+            // const formData = new FormData();
+            // formData.append("userimg",values.userimg) 
+            // formData.append("registerusergstno",values.registerusergstno)
+            // formData.append("registerusername",values.registerusername)
+            // formData.append("registeruseremail",values.registeruseremail)
+            // formData.append("registerusernumber",values.registerusernumber)
+            // formData.append("registeruseraddress",values.registeruseraddress)
 
 
-            await axios.post(`${API_BASE_URL}/registeruserdetails`, formData).then(res=>alert(res.data.message)).catch(err => console.log(err));
+            await axios.post(`${API_BASE_URL}/registeruserdetails`, values).then(res=>alert(res.data.message)).catch(err => console.log(err));
 
-        //     resetForm({values : ""});
+             resetForm({values : ""});
         }
     })
 
@@ -242,7 +242,7 @@ const ReuseRegisterUser = (params) => {
                                 <input type="text" className="form-control" placeholder="Search for name or designation..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href="#a">All</a></li>
@@ -250,7 +250,7 @@ const ReuseRegisterUser = (params) => {
                                     <li><a className="dropdown-item" href="#a">Last Month</a></li>
                                     <li><a className="dropdown-item" href="#a">Last Year</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                            </div>
                         </div>
                     </div>
@@ -611,7 +611,7 @@ const ReuseRegisterUser = (params) => {
                     <form autocomplete="on" id="memberlist-form" className="needs-validation" onSubmit={formik.handleSubmit} enctype="multipart/form-data">
                         <div className="row">
                             <div className="col-lg-12">
-                                <input type="hidden" id="memberid-input" className="form-control" value="" />
+                                {/* <input type="hidden" id="memberid-input" className="form-control" value="" />
                                 <div className="text-center mb-4">
                                     <div className="position-relative d-inline-block">
                                         <div className="position-absolute bottom-0 end-0">
@@ -632,7 +632,7 @@ const ReuseRegisterUser = (params) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* {(formik.touched.userimg && formik.errors.userimg) ? <small style={{color:"red"}}>{formik.errors.userimg}</small> : null} */}
 
                                 <div className="mb-3 mt-4">

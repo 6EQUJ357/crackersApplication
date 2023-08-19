@@ -159,3 +159,11 @@
   transform: translateY(-50%);
 }
 
+
+/* user preview images */
+
+.previewImg {
+  width: 150px;
+  height: 150px;
+}
+

@@ -1,10 +1,6 @@
 let mongoose = require("mongoose");
 
 let addRegisterUserDetailsModel = mongoose.Schema({
-    userimg : {
-        type : String,
-        require : true
-    },
     registerusergstno : {
         type : String,
         require : true

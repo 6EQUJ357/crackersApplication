@@ -60,7 +60,7 @@ const Reuseeditsregisteruser = (params) => {
             {/* Begin page */}
     <div id="layout-wrapper">
      <Reusenavbar value1 ={params.value1} value2 = {params.value2} value3 = {params.value3}/>
-
+ 
 
 {/* removeNotificationModal */}
 <div id="removeNotificationModal" className="modal fade zoomIn" tabIndex="-1" aria-hidden="true">

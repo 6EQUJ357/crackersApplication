@@ -9,6 +9,7 @@ import {useReactToPrint} from "react-to-print"
 import Footer from '../components/footer'
 import Downloadtoexcel from '../components/Download to excel';
 import "../../App.css"
+import API_BASE_URL from '../components/config';
 
 
 
@@ -147,7 +148,7 @@ const ReusePurchasedetails = (params) => {
 
                                             <div className="mt-sm-0 mt-3">
                                                 <div className="mb-4">
-                                                    <img src={params.value3?.[0].company_logo}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt='logo dark'/>
+                                                    <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt='logo dark'/>
                                                     {/* <span style={{fontWeight : "bolder", fontSize:"2rem", color:"black", textTransform : "capitalize"}} >{params.value3?.[0].company_name}</span> */}
 
                                                     {/* <img src={params.value3?.[0].company_logo}  className="card-logo card-logo-light" alt="logo light" height="80" /> */}

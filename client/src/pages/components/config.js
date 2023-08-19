@@ -6,9 +6,15 @@ const API_BASE_URL = "http://localhost:8080"
 
 //latest
 //const API_BASE_URL = "https://crakersapi.msoftweb.online";
+
+//render server end point (active)
+
+//const API_BASE_URL = "https://crackers.onrender.com";
+
+//const API_BASE_URL = "https://api.saibalajifireworks.in";
  
 
 
  
-export default API_BASE_URL;
-             
+export default API_BASE_URL; 
+              

@@ -6,7 +6,7 @@ import * as Yup from "yup"
 import axios from 'axios'
 import { useLocation, Link } from 'react-router-dom'
 import Footer from '../components/footer'
-
+import "../../App.css"
 
 import API_BASE_URL from "../components/config";
 
@@ -28,8 +28,8 @@ const ReuseEditsCompanyProfileData = (params) => {
             mobile_No : viewcompanyProfile.mobile_No,
             email : viewcompanyProfile.email, 
             address : viewcompanyProfile.address,
-            company_logo : viewcompanyProfile.company_logo,
-             imageURL: "",
+            company_logo : null, 
+            imageURL: "",
         },
         validationSchema:Yup.object({
             company_name : Yup.string().required("Company Name Required"),
@@ -37,13 +37,13 @@ const ReuseEditsCompanyProfileData = (params) => {
             mobile_No : Yup.string().required('Phone number is required').matches(/^\d+$/, 'Phone number must only contain numbers').min(10, 'Phone number must be exactly 10 digits').max(10, 'Phone number must be exactly 10 digits'),
             email : Yup.string().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email address').required("Email Required"),
             address : Yup.string().required("Enter Address"),
-            company_logo : Yup.mixed().required('Image is required')
-            .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
-              value && ['image/jpeg', 'image/png'].includes(value.type)
-            )
-            .test('fileSize', 'Image size should be below 1MB', (value) =>
-              value && value.size <= 1024 * 1024
-            )
+            // company_logo : Yup.mixed().required('Image is required')
+            // .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
+            //   value && ['image/jpeg', 'image/png'].includes(value.type)
+            // )
+            // .test('fileSize', 'Image size should be below 1MB', (value) =>
+            //   value && value.size <= 1024 * 1024
+            // )
         }),
         onSubmit :(values, {resetForm})=>{
 
@@ -191,9 +191,9 @@ const ReuseEditsCompanyProfileData = (params) => {
                                         <div className="dropzone mb-3"> 
                                             <div className="fallback">
                                                 <input name="company_logo" type="file" onChange={handleImageChange}  />
-                                                {formik.errors.company_logo ? <small style={{color:"red"}}>{formik.errors.company_logo}</small> : null}
+                                                {/* {formik.errors.company_logo ? <small style={{color:"red"}}>{formik.errors.company_logo}</small> : null} */}
                                                 <br /><br />
-                                                {imageURL && <img src={imageURL} alt='no preview...' />}
+                                                {imageURL && <img className='previewImg' src={imageURL} alt='no preview...' />}
 
                                             </div>
 

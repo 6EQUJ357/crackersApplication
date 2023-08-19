@@ -16,7 +16,7 @@ const Reuseroductlist = (params) => {
   const [items, setItems] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20; // Number of items to display per page
+  const itemsPerPage = 30; // Number of items to display per page
 
   //console.log("items", items)
 
@@ -109,6 +109,11 @@ const Reuseroductlist = (params) => {
  const EditProduct = (data)=>{
      navigate("/editproduct", {state : data})
  }
+
+ //view product 
+ const ViewProduct = (data)=>{
+    navigate("/viewproduct", {state : data})
+}
 
   return (
     
@@ -239,6 +244,7 @@ const Reuseroductlist = (params) => {
                                             {/* mapping product list items start */} 
 
                                             <tbody >
+                                                
                                                 {currentData.length >0 ? currentData.filter(list=>list.productname.toLowerCase().startsWith(searchproduct.toLowerCase())).map(res=>
                                                 
                                                     <tr key={res._id}>
@@ -272,8 +278,8 @@ const Reuseroductlist = (params) => {
                                                                 </button>
                                                                 <ul className="dropdown-menu dropdown-menu-end">
                                                                     <li>
-                                                                        <Link to={`/viewproduct?name=${res.productname}&desc=${res.productdesc}&price=${res.productprice}&img=${res.img}&type=${res.producttype}`} className="dropdown-item"><i className="las la-eye fs-18 align-middle me-2 text-muted"></i>
-                                                                            View</Link>
+                                                                        <button type='button' onClick={()=>ViewProduct(res)} className="dropdown-item"><i className="las la-eye fs-18 align-middle me-2 text-muted"></i>
+                                                                            View</button>
                                                                     </li>
                                                                     
                                                                     <li>
@@ -328,12 +334,12 @@ const Reuseroductlist = (params) => {
                                                     <td>Total</td>
                                                     <td></td>
                                                     <td>{currentData.map(list=>list.items).reduce((a,b)=> (Number(a)+ Number(b)))}</td>  
-                                                    <td>{currentData.map(price=> price.productprice).reduce((a,b)=> Number(a) + Number(b))}</td>  
+                                                    <td>{(currentData.map(price=> price.productprice).reduce((a,b)=> Number(a) + Number(b))).toFixed(2)}</td>  
                                                     <td></td>
                                                  </tr>
                                                 }
 
-                                            {/* mappingproduct list items end */}
+                                            {/* mappingproduct list items end */} 
                                                                     
                                          </tbody>  {/* end tbody */}
                                                 
@@ -344,7 +350,7 @@ const Reuseroductlist = (params) => {
 
                             <div className="row align-items-center mb-4 gy-3">
                         <div className="col-md-5">
-                            <p className="mb-0 text-muted">Showing <b>1</b> to <b>20</b> of <b>{items.length}</b> results</p>
+                            <p className="mb-0 text-muted">Showing <b>1</b> to <b>{currentData.length}</b> of <b>{items.length}</b> results</p>
                         </div>
 
                         <div className="col-sm-auto ms-auto">

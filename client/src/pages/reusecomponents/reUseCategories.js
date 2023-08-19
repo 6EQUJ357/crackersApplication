@@ -407,7 +407,7 @@ const ReuseCategories = (params) => {
 
                                 <div className="hstack gap-2 justify-content-end">
                                     <button type="button" className="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" className="btn btn-success" id="addNewMember">Add Category</button>
+                                    <button type="submit" className="btn btn-success" id="addNewMember">Edit Category</button>
                                 </div>
                             </div>
                         </div>

@@ -101,7 +101,8 @@ app.post("/muser",userUpload.single("userimg"), async(req,res)=>{
              images = null
          }
          else{
-          images =req.protocol + '://' + req.get('host') + '/UserImages/' + req.file.filename;
+        //   images =req.protocol + '://' + req.get('host') + '/UserImages/' + req.file.filename;
+        images = req.file.filename;
          }
 
 
@@ -163,9 +164,18 @@ app.delete("/deleteuserdetails/:id", async(req,res)=>{
 //edit user details
 
 
-    app.put("/edituserdetails/:id", async(req,res)=>{
+    app.put("/edituserdetails/:id",userUpload.single("userimg"), async(req,res)=>{
         try{
             const {editusername, edituseremail, edituserpassword} = req.body; 
+
+            let images;
+            if( req.body.userimg === 'null'){
+                images = null
+            }
+            else{
+             //images =req.protocol + '://' + req.get('host') + '/UserImages/' + req.file.filename;
+             images = req.file.filename;
+            }
 
             // Generate a salt
         const salt = await bcrypt.genSalt(10);
@@ -174,6 +184,7 @@ app.delete("/deleteuserdetails/:id", async(req,res)=>{
         const hashedPassword = await bcrypt.hash(edituserpassword, salt);
     
             await mcreate.findByIdAndUpdate(req.params.id, {
+                userimg : images,
                 username : editusername,
                 email : edituseremail, 
                 password : hashedPassword 
@@ -194,9 +205,18 @@ app.delete("/deleteuserdetails/:id", async(req,res)=>{
     })
 
 //edit admin details
-app.put("/editadmindetails/:id", async(req,res)=>{
+app.put("/editadmindetails/:id",userUpload.single("userimg"), async(req,res)=>{
     try{
         const {username, email, password} = req.body; 
+
+        let images;
+         if( req.body.userimg === 'null'){
+             images = null
+         }
+         else{
+        //   images =req.protocol + '://' + req.get('host') + '/UserImages/' + req.file.filename;
+        images = req.file.filename;
+         }
 
         // Generate a salt
     const salt = await bcrypt.genSalt(10);
@@ -205,6 +225,7 @@ app.put("/editadmindetails/:id", async(req,res)=>{
     const hashedPassword = await bcrypt.hash(password, salt);
 
         await mcreate.findByIdAndUpdate(req.params.id, {
+            userimg : images,
             username : username,
             email : email, 
             password : hashedPassword
@@ -308,18 +329,20 @@ const companyprofile_storage = multer.diskStorage({
 app.post("/companyprofile",companyprofile_upload.single("company_logo"), async(req, res)=>{
     try{
         const {company_name, GST_No, mobile_No, email, address} = req.body;
+        console.log("first", req.body)
 
         let images;
-         if( req.body.userimg === 'null'){
+         if( req.body.company_logo === 'null' || ""){
              images = null
          }
          else{
-          images =req.protocol + '://' + req.get('host') + '/companyprofileimg/' + req.file.filename;
+        //   images =req.protocol + '://' + req.get('host') + '/companyprofileimg/' + req.file.filename;
+        images = req.file.filename;
          }
 
 
 
-        let exist = await company_profileModel.findOne({email:email})
+        let exist = await company_profileModel.findOne({email:email})  
        
         if(exist){
             return res.send({status:400, message:"profile already exist for this Email"})
@@ -360,13 +383,15 @@ app.put("/updatecompanyprofiledata/:id",companyprofile_upload.single("company_lo
     
          const userId = req.params.id;
          const {company_name, GST_No, mobile_No, email, address} = req.body;
+         
 
          let images;
-         if( req.body.userimg === 'null'){
+         if(req.body.company_logo === ''){
              images = null
          }
          else{
-          images =req.protocol + '://' + req.get('host') + '/companyprofileimg/' + req.file.filename;
+        //   images =req.protocol + '://' + req.get('host') + '/companyprofileimg/' + req.file.filename;
+        images = req.file.filename
          }
 
 
@@ -375,13 +400,13 @@ app.put("/updatecompanyprofiledata/:id",companyprofile_upload.single("company_lo
             if (!updatedUser) { 
               return res.status(404).json({ message: 'User not found' });
              }
-             return res.send({status: 200, message: "Profile Updated successsfull..."}); 
+             return res.json({status: 200, message: "Profile Updated successsfull..."}); 
            })
           
     }
     catch(err){
         console.log(err)
-        return res.send({status:500, message:"internal server error line:44",})
+        return res.json({status:500, message:"internal server error line:407"})
     }
  })
 //delete company profile data
@@ -466,7 +491,8 @@ app.post("/addproducts",upload.array('img'), async(req,res)=>{
              images = null
          }
          else{
-             images = req.files.map(data=>req.protocol + '://' + req.get('host') + '/Images/' + data.filename)
+            //  images = req.files.map(data=>req.protocol + '://' + req.get('host') + '/Images/' + data.filename)
+            images = req.file.filename;
         }
 
         let itemss;
@@ -495,7 +521,7 @@ app.post("/addproducts",upload.array('img'), async(req,res)=>{
         return res.status(500).send("internal server error...")
     }
 })
-
+   
 //get all product list
 
 app.get("/allproductlist",async(req,res)=>{
@@ -546,7 +572,8 @@ app.put("/updateproducts/:id",upload.array('img'),async(req,res)=>{
              images = null
          }
          else{
-             images = req.files.map(data=>req.protocol + '://' + req.get('host') + '/Images/' + data.filename)
+            //  images = req.files.map(data=>req.protocol + '://' + req.get('host') + '/Images/' + data.filename)
+            images = req.file.filename;
         }
 
 
@@ -658,13 +685,13 @@ app.post("/invoicetransaction", async(req,res)=>{
     try{
        // console.log("invoicetransaction", req.body)
 
-       const {invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, rows} = req.body;
+       const {invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, producttype, rows} = req.body;
 
        let exist = await AddinvoiceModel.findOne({invoiceno : invoiceno});
 
        if(!exist){
 
-       let savepurchase = new AddinvoiceModel({invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, rows});
+       let savepurchase = new AddinvoiceModel({invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, producttype, rows});
 
        await savepurchase.save();
        }
@@ -767,48 +794,49 @@ app.delete("/deleteinvoicetransaction/:id", async(req,res)=>{
 
  //multer image store in a images file
 
-app.use("/RegisterUserImages", express.static("RegisterUserImages"))
+// app.use("/RegisterUserImages", express.static("RegisterUserImages"))
 
-const registerUserStorage = multer.diskStorage({
-    destination: (req, file, cb)=> {
-      cb(null, 'RegisterUserImages'); 
-    },
-    filename: (req, file, cb)=> {
-        //console.log(file)
-      cb(null, Date.now() + path.extname(file.originalname)); 
-    } 
-  }); 
+// const registerUserStorage = multer.diskStorage({
+//     destination: (req, file, cb)=> {
+//       cb(null, 'RegisterUserImages'); 
+//     },
+//     filename: (req, file, cb)=> {
+//         //console.log(file)
+//       cb(null, Date.now() + path.extname(file.originalname)); 
+//     } 
+//   }); 
 
 
   //image file type  check
-  const registerUserImgfilter = (req, file, cb) => { 
-    if (
-      file.mimetype === 'image/png' ||
-      file.mimetype === 'image/jpg' ||
-      file.mimetype === 'image/jpeg'
-    ) {
-      cb(null, true);
-    } else {
-      cb(null, "Only image files are allowed");
-    }
-  };
+//   const registerUserImgfilter = (req, file, cb) => { 
+//     if (
+//       file.mimetype === 'image/png' ||
+//       file.mimetype === 'image/jpg' ||
+//       file.mimetype === 'image/jpeg'
+//     ) {
+//       cb(null, true);
+//     } else {
+//       cb(null, "Only image files are allowed");
+//     }
+//   };
   
-  const registerUserUpload = multer({ storage: registerUserStorage, filefilter: registerUserImgfilter });
+  //const registerUserUpload = multer({ storage: registerUserStorage, filefilter: registerUserImgfilter });
   //multer image store in a images file end
 
-app.post("/registeruserdetails",registerUserUpload.single("userimg"), async(req,res)=>{
+app.post("/registeruserdetails", async(req,res)=>{
    // console.log("second", req.body)
-
+ 
 
     try{
          const {registerusergstno, registerusername, registeruseremail, registerusernumber, registeruseraddress} = req.body;
-         let images;
-         if( req.body.userimg === 'null'){
-             images = null
-         }
-         else{
-          images =req.protocol + '://' + req.get('host') + '/RegisterUserImages/' + req.file.filename;
-         }
+        //  let images;
+        //  if( req.body.userimg === 'null'){
+        //      images = null
+        //  }
+        //  else{
+        // //   images =req.protocol + '://' + req.get('host') + '/RegisterUserImages/' + req.file.filename;
+        // images = req.file.filename;
+        //  }
 
          let exist = await addRegisterUserDetailsModel.findOne({registeruseremail:registeruseremail});
 
@@ -816,7 +844,7 @@ app.post("/registeruserdetails",registerUserUpload.single("userimg"), async(req,
              return res.send({status:400, message:"Customer Already Exist"})
          }
          else{
-             let saveData = new addRegisterUserDetailsModel({userimg : images, registerusergstno, registerusername, registeruseremail, registerusernumber, registeruseraddress})
+             let saveData = new addRegisterUserDetailsModel({registerusergstno, registerusername, registeruseremail, registerusernumber, registeruseraddress})
              await saveData.save().then(respo=> res.send({status:200, message : "Client Added Successfull..."})).catch(err=> console.log(err));
          }
     }
@@ -1296,7 +1324,8 @@ app.post("/captureImg", captureimgUpload.single("photo"),async(req,res)=>{
     try{
         console.log("first", req.body, req.file);
 
-        let images =req.protocol + '://' + req.get('host') + '/Captureimg/' + req.file.filename; 
+        // let images =req.protocol + '://' + req.get('host') + '/Captureimg/' + req.file.filename; 
+        images = req.file.filename;
 
         let saveCapture = new captureImgModel({photo:images});
         await saveCapture.save();

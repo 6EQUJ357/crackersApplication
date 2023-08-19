@@ -70,13 +70,13 @@ const Signup = () => {
             conformPassword : ""
         },
         validationSchema: Yup.object({
-            userimg: Yup.mixed().required('Image is required')
-            .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
-              value && ['image/jpeg', 'image/png'].includes(value.type)
-            )
-            .test('fileSize', 'Image size should be below 1MB', (value) =>
-              value && value.size <= 1024 * 1024
-            ),
+            // userimg: Yup.mixed().required('Image is required')
+            // .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
+            //   value && ['image/jpeg', 'image/png'].includes(value.type)
+            // )
+            // .test('fileSize', 'Image size should be below 1MB', (value) =>
+            //   value && value.size <= 1024 * 1024
+            // ),
             username : Yup.string().required("Name Required"),
             email : Yup.string().email("Email Invalid").required("Email Required"),
             password : Yup.string().min(6, "Password Must Be 6 Characters At Least").required("Password Required"),
@@ -138,7 +138,7 @@ const Signup = () => {
                                     <a href="index.html">
                                         <span className="logo-lg">
                                             
-                                            <img src={company_profile_dataa[0].company_logo} alt="img not support..." height="35" />&nbsp;
+                                            <img src={`${API_BASE_URL}/companyprofileimg/${company_profile_dataa[0]?.company_logoo}`}  alt="img not support..." height="35" />&nbsp;
                                             <span style={{fontWeight : "bolder", fontSize:"2rem", color:"black", textTransform:"capitalize"}} >{company_profile_dataa[0].company_name}</span>
                                             
                                             
@@ -212,7 +212,7 @@ const Signup = () => {
                                                                     <input type="file" className="form-control pe-5 password-input"  name='userimg' onChange={handleImageChange} />
                                                                     
                                                                </div>
-                                                               {(formik.touched.userimg && formik.errors.userimg) ? <small style={{color:"red"}}>{formik.errors.userimg}</small> : null}
+                                                               {/* {(formik.touched.userimg && formik.errors.userimg) ? <small style={{color:"red"}}>{formik.errors.userimg}</small> : null} */}
                                                             </div>
                                                             
                 
@@ -258,7 +258,7 @@ const Signup = () => {
                                             </div>
                 
                                             <div className="col-lg-6">
-                                                <div className="d-flex h-100 bg-auth align-items-end" style={{backgroundImage :(imageURL && !formik.errors.userimg) ? `url(${imageURL})`:`url('assets/images/bg-auth.jpg')`}}>
+                                                <div className="d-flex h-100 bg-auth align-items-end" style={{backgroundImage :(imageURL && !formik.errors.userimg) ? `url(${imageURL})`:`url('assets/images/crackersimage.jpg')`}}>
                                                     <div className="p-lg-5 p-4">
                                                         <div className="bg-overlay bg-primary"></div>
                                                         <div className="p-0 p-sm-4 px-xl-0 py-5">
@@ -270,7 +270,7 @@ const Signup = () => {
                                                                 </div>
                                                             
                                                                 {/* end carouselIndicators */}
-                                                                <div className="carousel-inner mx-auto">
+                                                                {/* <div className="carousel-inner mx-auto">
                                                                     <div className="carousel-item active">
                                                                         <div className="testi-contain text-center">
                                                                             <h5 className="fs-20 text-white mb-0">“I feel confident
@@ -306,7 +306,7 @@ const Signup = () => {
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                                 {/* end carousel-inner */}
                                                             </div>
                                                             {/* end review carousel */}

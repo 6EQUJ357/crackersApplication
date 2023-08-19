@@ -40,13 +40,13 @@ const ViewUser = () => {
 //     axios.get()
 //   },[])
    //selected img URL
-   //const [imageURL, setImageURL] = useState('');
+   const [imageURL, setImageURL] = useState('');
 
 
     const formik = useFormik({
         initialValues : {
-            // userimg : null,
-            // imageURL: '',
+            userimg : null,
+            imageURL: '',
             username : viewuser.username,
             email : viewuser.email,
             password : "",
@@ -69,16 +69,14 @@ const ViewUser = () => {
         onSubmit : async(values, {resetForm})=>{
             //console.log("values", values)
 
-            // const formData = new FormData();
-            // formData.append("userimg",values.userimg)
-            // formData.append("username",values.username)
-            // formData.append("userType",values.userType)
-            // formData.append("email",values.email)
-            // formData.append("password",values.password)
-            // formData.append("conformPassword",values.conformPassword)
+            const formData = new FormData();
+            formData.append("userimg",values.userimg)
+            formData.append("username",values.username)
+            formData.append("email",values.email)
+            formData.append("password",values.password)
 
 
-            await axios.put(`${API_BASE_URL}/editadmindetails/${viewuser._id}`, values).then(res=>alert(res.data.message)).catch(err => console.log(err));
+            await axios.put(`${API_BASE_URL}/editadmindetails/${viewuser._id}`, formData).then(res=>alert(res.data.message)).catch(err => console.log(err));
 
             resetForm({values : ""});
         } 
@@ -107,13 +105,13 @@ const ViewUser = () => {
         if (file && file.size <= 1024 * 1024) {
             formik.setFieldValue('userimg', file);
         
-            // const imageURL = URL.createObjectURL(file);
-            // setImageURL(imageURL);
+            const imageURL = URL.createObjectURL(file);
+            setImageURL(imageURL);
           } 
-        //   else {
-        //     formik.setFieldValue('userimg', null);
-        //     setImageURL('');
-        //   }
+          else {
+            formik.setFieldValue('userimg', null);
+            setImageURL('');
+          }
       };
 
   return (
@@ -124,7 +122,7 @@ const ViewUser = () => {
                  <div className="preview "> {/*col-md-6 */}      
                  <div className="preview-pic tab-content">
                         <h3 className="product-title">{viewuser.username}</h3>
-                        <div className="tab-pane active" id="pic-1"><img src={viewuser.userimg} alt='img not support...'/></div>
+                        <div className="tab-pane active" id="pic-1"><img src={`${API_BASE_URL}/UserImages/${viewuser.userimg}`} alt='img not support...'/></div>
                     </div>                                                                         
                 </div>
 
@@ -163,7 +161,7 @@ const ViewUser = () => {
                     <form autocomplete="on" id="memberlist-form" className="needs-validation" onSubmit={formik.handleSubmit} enctype="multipart/form-data">
                         <div className="row">
                             <div className="col-lg-12">
-                                {/* <input type="hidden" id="memberid-input" className="form-control" value="" />
+                                <input type="hidden" id="memberid-input" className="form-control" value="" />
                                 <div className="text-center mb-4">
                                     <div className="position-relative d-inline-block">
                                          <div className="position-absolute bottom-0 end-0">
@@ -183,7 +181,7 @@ const ViewUser = () => {
                                             </div>
                                         </div> 
                                     </div>
-                                </div> */}
+                                </div>
                                 {/* {formik.errors.userimg ? <small style={{color:"red"}}>{formik.errors.userimg}</small> : null} */}
 
                                 <div className="mb-3 mt-4">
@@ -201,16 +199,16 @@ const ViewUser = () => {
                                 {formik.errors.email ? <small style={{color:"red"}}>{formik.errors.email}</small> : null}
 
                                 <div className="mb-3">
-                                    <label htmlFor="teammembersnumber" className="form-label">Password</label>
+                                    <label htmlFor="teammembersnumber" className="form-label">New Password</label>
 
                                     <div className="position-relative auth-pass-inputgroup mb-3">
-                                        <input type={pass1} className="form-control" id="teammembersnumber" placeholder="Enter Password" name='password' value={formik.values.password} onChange={formik.handleChange} />
+                                        <input type={pass1} className="form-control" id="teammembersnumber" placeholder="Enter New Password" name='password' value={formik.values.password} onChange={formik.handleChange} />
                                         <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon" onClick={()=>togleHandle1()}><i className={`las la-${eyeoff1} align-middle fs-18`}></i></button>
                                     </div>
                                     
                                     <div className="invalid-feedback">Please Enter a member Password.</div>
                                 </div>
-                                {formik.errors.password ? <small style={{color:"red"}}>{formik.errors.password}</small> : null}
+                                {(formik.touched.password && formik.errors.password) ? <small style={{color:"red"}}>{formik.errors.password}</small> : null}
 
                                 {/* <div className="mb-3">
                                     <label htmlFor="teammembersnumbrs" className="form-label">Conform Password</label>

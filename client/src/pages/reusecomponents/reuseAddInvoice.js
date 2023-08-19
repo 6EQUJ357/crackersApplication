@@ -70,6 +70,7 @@ const ReuseAddInvoice = (params) => {
         CGST : "",
         totalAmount : "",
         receiveAmount : "",
+        producttype : "",
         rows: []
         
     },
@@ -86,7 +87,8 @@ const ReuseAddInvoice = (params) => {
         paymentmethod : Yup.string().required("Choose Payment Method"),
         holdername : Yup.string().required("Name Required"), 
         cardnumber : Yup.string().required("Enter Card Number").length(19),
-        receiveAmount : Yup.string().required("Enter Amount To Be Paid At Initial")
+        receiveAmount : Yup.string().required("Enter Amount To Be Paid At Initial"),
+        producttype : Yup.string().required("Specify Type")
     }),
     onSubmit :async(values, {resetForm})=>{
 
@@ -107,7 +109,7 @@ const handleAddRow = () => {
     const newRow = {
       sno: formik.values.rows.length + 1, 
       productname : "",
-      producttype : "",
+    //   producttype : "",
       productprice : "",
       quantity : "",
       tax : "",
@@ -159,15 +161,16 @@ const handleNameChange = (e, index)=>{
 
 
   //product type handle change
-  const handleTyprChange = (e, index)=>{
+  const handleTyprChange = (e)=>{
     const { value } = e.target;
+    formik.setFieldValue("producttype", value);
 
-    const updatedRows = [...formik.values.rows];
-    updatedRows[index].producttype = value;
-    formik.setFieldValue('rows', updatedRows);
+    // const updatedRows = [...formik.values.rows];
+    // updatedRows[index].producttype = value;
+    // formik.setFieldValue('rows', updatedRows);
 
     
-    setproductNameBasedOnProducyType(items.filter(list=>list.producttype === e.target.value));
+    setproductNameBasedOnProducyType(items.filter(list=>list.producttype === e.target.value)); 
   //console.log("prdf efrg", productNameBasedOnProducyType)
 
     // let namee= updatedRows[index].productname; //product name
@@ -463,25 +466,26 @@ const handlePaymentMethodOnCash = (e)=>{
                                                         </div>
                                                     </div>
                                                     {/*end col*/}
-                                                    {/* <div className="col-lg-8 col-sm-6">
-                                                        <label htmlFor="choices-payment-status">Payment Status</label>
-                                                        <div className="input-light">
-                                                            <select className="form-control bg-light border-0" data-choices data-choices-search-false id="choices-payment-status" name='paymentstatus' value={formik.values.paymentstatus} onChange={paymentStatusHandle}>
-                                                                <option>--Select Payment Status--</option>
-                                                                <option value="Paid">Paid</option>
-                                                                <option value="Unpaid">Unpaid</option>
-                                                                <option value="Pending">Pending</option>
-                                                            </select>
-                                                        </div>
-                                                        {(formik.touched.paymentstatus && formik.errors.paymentstatus) ? <small style={{color:"red"}}>{formik.errors.paymentstatus}</small> : null}
-                                                    </div> */}
+                                                    {/* {formik.values.rows.map((row, index) => ( */}
+                                                    <div className="col-lg-8 col-sm-6">
+                                                        <label htmlFor="choices-payment-status">Category</label>
+                                                         <div className="input-light">
+                                                               {/* <input list="brow1" name={`rows[${index}].producttype`} id="productName-11"  onChange={(e) => handleTyprChange(e, index)} />  */}
+
+                                                               <input list="brow1" name="producttype" id="productName-11"  onChange={(e) => handleTyprChange(e)} /> 
+
+                                                                <datalist id="brow1"  >
+                                                                    {uniqueArrayProductType.map((list,id)=>
+                                                                    <option key={id} value={list}>{list}</option>)}
+                                                                </datalist> 
+                                                                </div> 
+
+                                                                {(formik.errors.producttype && formik.touched.producttype) && <div style={{color:"red"}}>{formik.errors.producttype}</div>}
+                                                        
+                                                    </div>
+                                                    {/* ))} */}
                                                     {/*end col*/}
-                                                    {/* <div className="col-lg-8 col-sm-6">
-                                                        <div>
-                                                            <label htmlFor="totalamountInput">Total Amount</label>
-                                                            <input type="text" className="form-control bg-light border-0" id="totalamountInput" placeholder="₹0.00" readOnly = "readonly" name='totalAmount' value={formik.values.totalAmount} />
-                                                        </div>
-                                                    </div> */}
+                                                    
                                                     {/*end col*/}
                                                 </div>
                                                 
@@ -496,7 +500,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             
                                                             <span className="overflow-hidden border border-dashed d-flex align-items-center justify-content-left rounded" >
 
-                                                                <img src={params.value3?.[0].company_logo} className="card-logo card-logo-dark user-profile-image img-fluid  c_profile_addinvoice_img" alt="logo dark" />
+                                                                <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`} className="card-logo card-logo-dark user-profile-image img-fluid  c_profile_addinvoice_img" alt="logo dark" />
  
                                                                 <span className='c_profile_name c_profile_addinvoice_name' >{params.value3?.[0].company_name}</span>
                                                                 
@@ -663,7 +667,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                     <tr className="table-active">
 
                                                         <th>S.no</th>
-                                                        <th scope="col" >Category</th>
+                                                        {/* <th scope="col" >Category</th> */}
                                                         <th scope="col" >Product Name</th>
                                                         <th scope="col" >
                                                             <div className="d-flex currency-select input-light align-items-center">
@@ -690,35 +694,35 @@ const handlePaymentMethodOnCash = (e)=>{
 
                                                 {formik.values.rows.map((row, index) => (
                                                     <tr id="1" className="product" key={index}>
-                                                        <td>{row.sno}</td>
+                                                        <td>{row.sno}</td> 
 
-                                                        <td className="text-start">
+                                                        {/* <td className="text-start">
                                                         <div className="mb-2 position-relative" >
 
-                                                            {/* <input className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].producttype`}  value={row.producttype}  onChange={(e) => handleInputChange(e, index)} /> */}
+                                                            // <input className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].producttype`}  value={row.producttype}  onChange={(e) => handleInputChange(e, index)} />
 
                                                             <input list="brow1" name={`rows[${index}].producttype`} id="productName-11"  onChange={(e) => handleTyprChange(e, index)} />
-                                                            {/* <span className="down_arrow_style"><i className="las la-angle-down fs-20 ms-1"></i></span> */}
 
                                                                 <datalist id="brow1"  >
                                                                     {uniqueArrayProductType.map((list,id)=>
                                                                     <option key={id} value={list}>{list}</option>)}
                                                                 </datalist> 
-                                                             {/* <select className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].producttype`}  onChange={(e) => handleTyprChange(e, index)} >
-                                                                <option>--Select--</option>
-                                                                {items.map((list,id)=><option key={id} value={list.producttype}>{list.producttype}</option>)}
-                                                                </select> */}
-                                                                
-                                                                {/* <input type="text" className="form-control bg-light border-0" id="productName-1" placeholder="Product Type" name="producttype" {...formik.getFieldProps("producttype")} />
-                                                                <div className="invalid-feedback">
-                                                                    Please enter a product type
-                                                                </div> */}
 
-                                                                {/* {formik.errors.rows && formik.errors.rows[index]?.producttype && (
-                                                                            <div>{formik.errors.rows[index].producttype}</div>
-                                                                        )}                                                             */}                                                          
+                                                            //  <select className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].producttype`}  onChange={(e) => handleTyprChange(e, index)} >
+                                                            //     <option>--Select--</option>
+                                                            //     {items.map((list,id)=><option key={id} value={list.producttype}>{list.producttype}</option>)}
+                                                            //     </select>
+                                                                
+                                                                // <input type="text" className="form-control bg-light border-0" id="productName-1" placeholder="Product Type" name="producttype" {...formik.getFieldProps("producttype")} />
+                                                                // <div className="invalid-feedback">
+                                                                //     Please enter a product type
+                                                                // </div>
+
+                                                                // {formik.errors.rows && formik.errors.rows[index]?.producttype && (
+                                                                //             <div>{formik.errors.rows[index].producttype}</div>
+                                                                //         )}                                                                                                                      
                                                          </div>
-                                                        </td>
+                                                        </td> */}
 
                                                         <td className="product-id" >
                                                                 <div className="mb-2 position-relative" >

@@ -158,7 +158,7 @@ const ReuseSalesPaymentdetails = (params) => {
 
                                                 <div className="mt-sm-0 mt-3">
                                                     <div className="mb-4">
-                                                        <img src={params.value3?.[0].company_logo}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt="logo dark"/>
+                                                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt="logo dark"/>
                                                                                         
                                                     </div>
                                                     

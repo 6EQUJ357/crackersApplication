@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "../../App.css"
 
+import API_BASE_URL from "./config.js";
+
 
 const Sidebar = (params) => {
   return (
@@ -13,22 +15,22 @@ const Sidebar = (params) => {
                {/* Dark Logo*/}
                 <Link to="/" className="logo logo-dark">
                     <span className="logo-sm">
-                        <img src={params.value3?.[0].company_logo} alt="no img" className='c_profile_img'/>
+                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`} alt="no img" className='c_profile_img'/>
                         <span className='c_profile_name c_profile_sidebar_name' >{params.value3?.[0].company_name}</span>
                     </span>
                     <span className="logo-lg">
-                        <img src={params.value3?.[0].company_logo} alt="no img" className='c_profile_img' />
+                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`} alt="no img" className='c_profile_img' />
                         <span className='c_profile_name c_profile_sidebar_name' >{params.value3?.[0].company_name}</span>
                     </span>
                 </Link>
                {/* Light Logo*/}
                 <a href="#" className="logo logo-light">
                     <span className="logo-sm">
-                        <img src={params.value3?.[0].company_logo} alt="no img" className='c_profile_img' />
+                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`} alt="no img" className='c_profile_img' />
                         <span className='c_profile_name c_profile_sidebar_name' >{params.value3?.[0].company_name}</span>
                     </span>
                     <span className="logo-lg">
-                        <img src={params.value3?.[0].company_logo} alt="no img" className='c_profile_img' />
+                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`} alt="no img" className='c_profile_img' />
                         <span className='c_profile_name c_profile_sidebar_name' >{params.value3?.[0].company_name}</span>
                     </span>
                 </a>

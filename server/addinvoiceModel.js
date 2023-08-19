@@ -70,6 +70,10 @@ let AddinvoiceModel = mongoose.Schema({
         type : String,
         require : true
     },
+    producttype : {
+        type : String,
+        require : true
+    },
     rows : {
         type : Array,
         require : true

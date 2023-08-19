@@ -6,6 +6,7 @@ import { Navigate, useNavigate} from 'react-router-dom'
 import { company_profile_store } from '../../App.js';
 import "../../App.css"
 
+
 import API_BASE_URL from "./config.js";
 
 
@@ -88,7 +89,7 @@ const Signin = () => {
                                     <Link to="/">
                                         <span className="logo-lg">
                                             
-                                            <img className='c_profile_img' src={company_profile_dataa[0]?.company_logo} alt="img not support..." />
+                                            <img className='c_profile_img' src={`${API_BASE_URL}/companyprofileimg/${company_profile_dataa[0]?.company_logo}`} alt="img not support..." />
                                             <span className='c_profile_name'>{company_profile_dataa[0]?.company_name}</span>
                                             
                                             
@@ -188,9 +189,9 @@ const Signin = () => {
                                                                 </ul>
                                                             </div> */}
                 
-                                                            <div className="mt-4 text-center">
+                                                            {/* <div className="mt-4 text-center">
                                                                 <p className="mb-0">Don't have an account ? <Link to ="/signup" className="fw-medium text-primary text-decoration-underline"> Signup now </Link> </p>
-                                                            </div>
+                                                            </div> */}
                                                         </form>
                                                     </div>
                                 
@@ -198,7 +199,7 @@ const Signin = () => {
                                             </div>
                 
                                             <div className="col-lg-6">
-                                                <div className="d-flex h-100 bg-auth align-items-end">
+                                                <div className="d-flex h-100 bg-auth align-items-end" style={{backgroundImage : "url('assets/images/crackersimage.jpg')"}}>
                                                     <div className="p-lg-5 p-4">
                                                         <div className="bg-overlay bg-primary"></div>
                                                         <div className="p-0 p-sm-4 px-xl-0 py-5">
@@ -210,7 +211,7 @@ const Signin = () => {
                                                                 </div>
                                                             
                                                                {/* end carouselIndicators */}
-                                                                <div className="carousel-inner mx-auto">
+                                                                {/* <div className="carousel-inner mx-auto">
                                                                     <div className="carousel-item active">
                                                                         <div className="testi-contain text-center">
                                                                             <h5 className="fs-20 text-white mb-0">“I feel confident
@@ -246,12 +247,12 @@ const Signin = () => {
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                                {/* end carousel-inner */}
                                                             </div>
                                                            {/* end review carousel */}
                                                         </div>
-                                                    </div>
+                                                    </div> 
                                                 </div>
                                             </div>
                                             
@@ -261,7 +262,7 @@ const Signin = () => {
                                 
                                 <div className="mt-5 text-center">
                                     <p className="mb-0 text-muted">©
-                                        <script>document.write(new Date().getFullYear())</script>Design & Developed By <i className="mdi mdi-heart text-danger"></i><a href='https://msoftweb.online/' style={{color:"red", fontWeight:"bold"}} target='_blank'>Msoft</a>.  
+                                        <script>document.write(new Date().getFullYear())</script>Design & Developed By <i className="mdi mdi-heart text-danger"></i><a href='https://msoftwebtechnologies.com/' style={{color:"red", fontWeight:"bold"}} target='_blank'>Msoft</a>.  
                                     </p>
                                 </div>
                             </div>

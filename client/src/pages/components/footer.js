@@ -11,7 +11,7 @@ const Footer = (params) => {
             <div className="col-12 col-sm-12 col-lg-6">
                 <div className="text-sm-end d-none d-sm-block">
                 <script>document.write(new Date().getFullYear())</script>Design & Developed By <i className="mdi mdi-heart text-danger"></i>
-                <a href='https://msoftweb.online/' style={{color:"red", fontWeight:"bold"}} target='_blank'>Msoft</a>.  
+                <a href='https://msoftwebtechnologies.com/' style={{color:"red", fontWeight:"bold"}} target='_blank'>Msoft</a>.  
                 </div>
             </div>
         </div>

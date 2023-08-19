@@ -54,7 +54,7 @@ if(!localStorage.getItem("token")){
 
                     <div className="preview-pic tab-content">
                     <h3 className="product-title">{viewcompanyProfile.company_name}</h3>
-                      <div className="tab-pane active" id="pic-1"><img src={viewcompanyProfile.company_logo} alt='img not support...'/></div>
+                      <div className="tab-pane active" id="pic-1"><img src={`${API_BASE_URL}/companyprofileimg/${viewcompanyProfile.company_logo}`} alt='img not support...'/></div>
 
                       {/* <ul className="preview-thumbnail nav nav-tabs"> 
                       {viewcompanyProfile.map((res,id)=>

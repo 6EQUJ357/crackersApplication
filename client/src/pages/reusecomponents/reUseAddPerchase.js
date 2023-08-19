@@ -431,7 +431,7 @@ const handlePaymentMethodOnCash = (e)=>{
 
                                                             <span className="overflow-hidden border border-dashed d-flex align-items-center justify-content-center rounded">
 
-                                                                <img src={params.value3?.[0].company_logo} className="card-logo card-logo-dark user-profile-image img-fluid c_profile_addinvoice_img" alt="logo dark" />
+                                                                <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark user-profile-image img-fluid c_profile_addinvoice_img" alt="logo dark" />
 
                                                                 <span className='c_profile_name c_profile_addinvoice_name' >{params.value3?.[0].company_name}</span>
                                                                 

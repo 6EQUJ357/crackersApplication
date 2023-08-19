@@ -33,13 +33,13 @@ const Company_profile = () => {
             mobile_No : Yup.string().required('Phone number is required').matches(/^\d+$/, 'Phone number must only contain numbers').min(10, 'Phone number must be exactly 10 digits').max(10, 'Phone number must be exactly 10 digits'),
             email : Yup.string().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email address').required("Email Required"),
             address : Yup.string().required("Enter Address"),
-            company_logo : Yup.mixed().required('Image is required')
-            .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
-              value && ['image/jpeg', 'image/png'].includes(value.type)
-            )
-            .test('fileSize', 'Image size should be below 1MB', (value) =>
-              value && value.size <= 1024 * 1024
-            ),
+            // company_logo : Yup.mixed().required('Image is required')
+            // .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
+            //   value && ['image/jpeg', 'image/png'].includes(value.type)
+            // )
+            // .test('fileSize', 'Image size should be below 1MB', (value) =>
+            //   value && value.size <= 1024 * 1024
+            // ),
         }), 
         onSubmit: async(values, {resetForm}) => {
 
@@ -182,7 +182,7 @@ const Company_profile = () => {
                                                                     <input type="file" className="form-control pe-5 password-input"  name='company_logo' onChange={handleImageChange} />
                                                                     
                                                                </div>
-                                                               {(formik.touched.company_logo && formik.errors.company_logo) ? <small style={{color:"red"}}>{formik.errors.company_logo}</small> : null}
+                                                               {/* {(formik.touched.company_logo && formik.errors.company_logo) ? <small style={{color:"red"}}>{formik.errors.company_logo}</small> : null} */}
                                                             </div>
 
                                                             {/* <div className="mb-2">

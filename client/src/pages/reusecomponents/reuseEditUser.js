@@ -6,6 +6,7 @@ import * as Yup from "yup"
 import axios from 'axios'
 import { useLocation, Link } from 'react-router-dom'
 import Footer from '../components/footer'
+import "../../App.css"
 
 
 import API_BASE_URL from "../components/config";
@@ -34,26 +35,62 @@ const ReuseEditsUser = (params) => {
     }
 }
 
+const [imageURL, setImageURL] = useState('');
+
     const formik = useFormik({
         initialValues : {
+            userimg : null,
+            imageURL: '',
             editusername : userData.username,
             edituseremail : userData.email, 
             edituserpassword : "",
         },
         validationSchema:Yup.object({
+             // userimg: Yup.mixed().required('Image is required')
+            // .test('fileType', 'Only JPEG and PNG images are allowed', (value) =>
+            //   value && ['image/jpeg', 'image/png'].includes(value.type)
+            // )
+            // .test('fileSize', 'Image size should be below 1MB', (value) =>
+            //   value && value.size <= 1024 * 1024
+            // ),
             editusername : Yup.string().required("Name Required"),
             edituseremail : Yup.string().required("Type Required"),
             edituserpassword : Yup.string().min(6, "Password Must Be 6 Characters At Least").required("Password Required")
 
         }),
         onSubmit :(values, {resetForm})=>{
-           
-            axios.put(`${API_BASE_URL}/edituserdetails/${userData._id}`, values).then(res=>alert(res.data.message)).catch(err=>console.log(err));
 
-            //resetForm({values:""})
+            const formData = new FormData();
+            formData.append("userimg",values.userimg)
+            formData.append("editusername",values.editusername)
+            formData.append("edituseremail",values.edituseremail)
+            formData.append("edituserpassword",values.edituserpassword)
+
+           
+            axios.put(`${API_BASE_URL}/edituserdetails/${userData._id}`, formData).then(res=>alert(res.data.message)).catch(err=>console.log(err));
+
+            resetForm({values : ""});
         }
  
     })
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        formik.setFieldValue('userimg', file);
+      
+        // Create a URL for the selected image
+
+        if (file && file.size <= 1024 * 1024) {
+            formik.setFieldValue('userimg', file);
+        
+            const imageURL = URL.createObjectURL(file);
+            setImageURL(imageURL);
+          } 
+          else {
+            formik.setFieldValue('userimg', null);
+            setImageURL('');
+          }
+      };
 
 
   
@@ -139,7 +176,7 @@ const ReuseEditsUser = (params) => {
                                    <div className="p-2">
                                     
                                     {/* add product form */}
-                                    <form onSubmit={formik.handleSubmit}>
+                                    <form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
                                         
                                     <div className="row">
 
@@ -151,9 +188,7 @@ const ReuseEditsUser = (params) => {
                                             </div>
                                         </div>
                                        
-                                    </div>
-                                        
-                                        <div className="row">
+                                   
                                             <div className="col-md-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" for="product type">Email</label>
@@ -165,18 +200,29 @@ const ReuseEditsUser = (params) => {
 
                                             <div className="col-lg-6">
 
-                                                <label className="form-label" for="price">Password</label>
+                                                <label className="form-label" for="price">New Password</label>
 
                                                 <div className="position-relative auth-pass-inputgroup mb-3">
 
-                                                    <input id="price" name="edituserpassword" placeholder="Enter Password" type={pass1} className="form-control" {...formik.getFieldProps("edituserpassword")} />
+                                                    <input id="price" name="edituserpassword" placeholder="Enter New Password" type={pass1} className="form-control" {...formik.getFieldProps("edituserpassword")} />
 
                                                     <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon" onClick={()=>togleHandle1()}><i className={`las la-${eyeoff1} align-middle fs-18`}></i></button>
 
                                                 </div>
                                                 {formik.errors.edituserpassword ? <small style={{color:"red"}}>{formik.errors.edituserpassword}</small> : null}
 
-                                            </div>                                         
+                                            </div>   
+
+
+                                            <div className="dropzone mb-3"> 
+                                                <div className="fallback">
+                                                    <input name="company_logo" type="file" onChange={handleImageChange}  />
+                                                    {/* {formik.errors.company_logo ? <small style={{color:"red"}}>{formik.errors.company_logo}</small> : null} */}
+                                                    <br /><br />
+                                                    {imageURL && <img className="previewImg" src={imageURL} alt='no preview...' />}
+
+                                                </div>
+                                            </div>                                      
 
                                         </div>                                      
 

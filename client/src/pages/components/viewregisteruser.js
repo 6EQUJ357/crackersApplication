@@ -21,7 +21,7 @@ const Viewregisteruser = () => {
         }
     }).catch(err => console.log(err))  
 },[]) 
-
+ 
 if(!localStorage.getItem("token")){
      return <Navigate to="/" />
 }
@@ -35,7 +35,7 @@ if(!localStorage.getItem("token")){
                 <div className="preview "> {/*col-md-6 */}          
                     <div className="preview-pic tab-content">
                         <h3 className="product-title">{viewRegisterUser.registerusername}</h3>
-                        {/* <div className="tab-pane active" id="pic-1"><img src={viewRegisterUser.userimg} alt='img not support...'/></div> */}
+                        {/* <div className="tab-pane active" id="pic-1"><img src={`${API_BASE_URL}/RegisterUserImages/${viewRegisterUser.userimg}`} alt='img not support...'/></div> */}
                     </div>
 
                 </div>

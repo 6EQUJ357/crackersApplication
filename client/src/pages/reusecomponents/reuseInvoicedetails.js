@@ -9,6 +9,7 @@ import {useReactToPrint} from "react-to-print"
 import Footer from '../components/footer'
 import "../../App.css"
 import Downloadtoexcel from '../components/Download to excel';
+import API_BASE_URL from '../components/config';
 
 
 const ReuseInvoicedetails = (params) => {
@@ -153,7 +154,7 @@ const ReuseInvoicedetails = (params) => {
 
                                                 <div className="mt-sm-0 mt-3">
                                                     <div className="mb-4">
-                                                        <img src={params.value3?.[0].company_logo}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt="logo dark"/>
+                                                        <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark c_profile_img c_profile_addinvoicedetails_img" alt="logo dark"/>
                                                         {/* <span style={{fontWeight : "bolder", fontSize:"2rem", color:"black", textTransform : "capitalize"}} >{params.value3?.[0].company_name}</span> */}
 
                                                         {/* <img src={params.value3?.[0].company_logo}  className="card-logo card-logo-light" alt="logo light" height="80" /> */}
@@ -209,6 +210,8 @@ const ReuseInvoicedetails = (params) => {
                                                     <span className="badge badge-soft-success fs-11" id="payment-status">{invoiceData.paymentstatus}</span>
                                                 </div>
                                                 {/*end col*/}
+
+                                                
                                                 {/* <div className="col-lg-6 col-6">
                                                     <p className="text-muted mb-1 text-uppercase fw-medium fs-14">Total Amount</p>
                                                     <h5 className="fs-16 mb-0">₹<span id="total-amount">{invoiceData.totalAmount}</span></h5>
@@ -270,6 +273,11 @@ const ReuseInvoicedetails = (params) => {
                                                 <span className="badge badge-soft-success fs-12">Due Date: {invoiceData.dateofpurchase.substr(0,10)}</span>
                                         </div>
 
+                                        <div className="col-lg-4 col-4">
+                                            <p className=" mb-1 text-uppercase fw-medium fs-14">Category</p>
+                                            <span className="badge badge-soft-success fs-11" id="payment-status">{invoiceData.producttype}</span>
+                                        </div>
+
                                     </div>
 
                                     <div className="row" >
@@ -296,7 +304,7 @@ const ReuseInvoicedetails = (params) => {
                                                                 <th scope="row">{res.sno}</th>
                                                                 <td className="text-start">
                                                                     <span className="fw-medium">{res.productname}</span>
-                                                                    <p className="text-muted mb-0">{res.producttype}</p>
+                                                                    {/* <p className="text-muted mb-0">{invoiceData.producttype}</p> */}
                                                                 </td>
                                                                 <td>{res.productprice}</td> 
                                                                 <td>{res.quantity}</td>
