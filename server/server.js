@@ -383,10 +383,11 @@ app.put("/updatecompanyprofiledata/:id",companyprofile_upload.single("company_lo
     
          const userId = req.params.id;
          const {company_name, GST_No, mobile_No, email, address} = req.body;
+          
          
 
          let images;
-         if(req.body.company_logo === ''){
+         if(req.body.company_logo === '' || null){ 
              images = null
          }
          else{

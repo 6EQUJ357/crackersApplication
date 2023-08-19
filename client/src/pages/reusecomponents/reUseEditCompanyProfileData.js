@@ -28,7 +28,7 @@ const ReuseEditsCompanyProfileData = (params) => {
             mobile_No : viewcompanyProfile.mobile_No,
             email : viewcompanyProfile.email, 
             address : viewcompanyProfile.address,
-            company_logo : null, 
+            company_logo : "", 
             imageURL: "",
         },
         validationSchema:Yup.object({
