@@ -45,22 +45,26 @@ let QuotationTransactionModel = mongoose.Schema({
         type : String,
         require : true
     },
-    subtotal : {
-        type : String,
-        require : true
-    }, 
-    SGST : {
-        type : String,
-        require : true
-    }, 
-    CGST : {
-        type : String,
-        require : true
-    }, 
+    // subtotal : {
+    //     type : String,
+    //     require : true
+    // }, 
+    // SGST : {
+    //     type : String,
+    //     require : true
+    // }, 
+    // CGST : {
+    //     type : String,
+    //     require : true
+    // }, 
     totalAmount : {
         type : String,
         require : true
     }, 
+    producttype : {
+        type : String,
+        require : true
+    },
     rows : {
         type : Array,
         require : true

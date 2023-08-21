@@ -7,6 +7,7 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import Footer from '../components/footer'
 import "../../App.css"
+import { Link } from 'react-router-dom'
 
 
 import API_BASE_URL from "../components/config";
@@ -234,7 +235,13 @@ const ReuseRegisterUser = (params) => {
                     <div className="row pb-4 gy-3">
                         <div className="col-sm-4">
                             <button className="btn btn-primary addPayment-modal" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i className="las la-plus me-1"></i> Add Client</button>
+                            &emsp;
+                            <Link to="/addinvoice" className="btn btn-primary addPayment-modal">Create New Invoice</Link>
+
                         </div>
+
+
+
 
                         <div className="col-sm-auto ms-auto">
                            <div className="d-flex gap-3">

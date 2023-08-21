@@ -244,7 +244,7 @@ const ReuseUsers = (params) => {
                                 <input type="text" className="form-control" id="searchMemberList" placeholder="Search for User Name" name='search' onChange={(e)=>setSearch(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href="#a">All</a></li>
@@ -252,7 +252,7 @@ const ReuseUsers = (params) => {
                                     <li><a className="dropdown-item" href="#a">Last Month</a></li>
                                     <li><a className="dropdown-item" href="#a">Last Year</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                            </div>
                         </div>
                     </div>

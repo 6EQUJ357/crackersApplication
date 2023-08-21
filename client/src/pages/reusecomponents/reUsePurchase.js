@@ -175,13 +175,13 @@ const Reusepurchase = (params) => {
                                 <input type="text" className="form-control" placeholder="Search invoiceNo or Client..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href='#a'>Print</a></li>
                                     <li><a className="dropdown-item" href='#a'>Export to Excel</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                            </div>
                         </div>
                     </div>
@@ -328,9 +328,9 @@ const Reusepurchase = (params) => {
                                                     <th scope="col" style={{width: "20%"}}>Email</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Billed</th>
-                                                    <th scope="col">Ipnut Tax</th>
+                                                    {/* <th scope="col">Ipnut Tax</th> */}
                                                     <th scope="col" style={{width: "16%"}}>Status</th>
-                                                    <th scope="col" style={{width: "12%"}}>Action</th>
+                                                    <th scope="col" style={{width: "12%"}}>Action</th> 
                                                 </tr>
                                             </thead>
         
@@ -350,7 +350,7 @@ const Reusepurchase = (params) => {
                                                     <td>{res.vendoremail}</td>
                                                     <td>{new Date(res.dateofpurchase).toLocaleString()}</td>
                                                     <td>{res.totalAmount}</td>
-                                                    <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td>
+                                                    {/* <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td> */}
                                                     <td><span className="badge badge-soft-success p-2">{res.paymentstatus}</span></td>
                                                     <td>
                                                         <div className="dropdown">
@@ -405,7 +405,8 @@ const Reusepurchase = (params) => {
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=>list.totalAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(3))}</td>  
-                                                    <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> 
+                                                    {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>  */}
+                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                  </tr>

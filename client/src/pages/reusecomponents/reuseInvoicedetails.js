@@ -169,14 +169,16 @@ const ReuseInvoicedetails = (params) => {
                                                 <div className="mt-sm-0 mt-3">
                                                     <p> <span className='c_profile_invoicedetaikls_name '>{params.value3?.[0].company_name}</span></p>
                                                     <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p>
+                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+
 
                                                 </div>
                                             </div>
 
                                             <div className="col-lg-4 col-4">
                                                 <div className="mt-sm-0 mt-3">
-                                                <h6 className="text-muted text-uppercase fw-semibold">Address</h6>
-                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+                                                {/* <h6 className="text-muted text-uppercase fw-semibold">Address</h6> */}
+                                                    {/* <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p> */}
                                                     
                                                     <h6><span className="text-muted fw-normal">Email : </span><span id="email">{params.value3?.[0].email}</span></h6>
                                                     {/* <h6><span className="text-muted fw-normal">Website:</span> <a href="https://themesbrand.com/" className="link-primary" rel='noreferrer' target="_blank" id="website">www.themesbrand.com</a></h6> */}
@@ -194,7 +196,7 @@ const ReuseInvoicedetails = (params) => {
                                             <h3 className="fw-bold mb-4">Invoice No : {invoiceData.invoiceno}</h3>
                                             <div className="row g-4">
                                                 <div className="col-lg-4 col-4">
-                                                    <p className=" mb-1 text-uppercase fw-bold fs-14">Vendor Name : {invoiceData.vendorname}</p>
+                                                    <p className=" mb-1 text-uppercase fw-bold fs-14">Customer Name : {invoiceData.vendorname}</p>
                                                     <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {invoiceData.vendorGSTno}</span></h5>
                                                 </div>
                                                 {/*end col*/}
@@ -292,10 +294,10 @@ const ReuseInvoicedetails = (params) => {
                                                                 <th scope="col" style={{width:"80px"}}>Rate</th>
                                                                 <th scope="col" style={{width:"80px"}}>Quantity</th>
                                                                 <th scope="col" style={{width:"80px"}}>Amount</th> 
-                                                                <th scope="col" style={{width:"80px"}}>Tax (%)</th>
+                                                                {/* <th scope="col" style={{width:"80px"}}>Tax (%)</th>
                                                                 <th scope="col" style={{width:"10px"}}>Taxable Amount</th>
                                                                 <th scope="col" style={{width:"10px"}} className="text-end">HSN Code</th>
-                                                                
+                                                                 */}
                                                             </tr>
                                                         </thead>
                                                         <tbody id="products-list">
@@ -309,9 +311,9 @@ const ReuseInvoicedetails = (params) => {
                                                                 <td>{res.productprice}</td> 
                                                                 <td>{res.quantity}</td>
                                                                 <td>{res.amount}</td>
-                                                                <td>{res.tax}</td>
+                                                                {/* <td>{res.tax}</td>
                                                                 <td>{res.taxableAmount}</td>
-                                                                <td className="text-end">{res.hsncode}</td>
+                                                                <td className="text-end">{res.hsncode}</td> */}
                                                             </tr>
                                                             )}
                                                             {/* <tr>
@@ -351,7 +353,7 @@ const ReuseInvoicedetails = (params) => {
                                                 <div className="border-top border-top-dashed mt-2">
                                                     <table className="table table-borderless table-nowrap align-middle mb-0 ms-auto" style={{width: "250px"}}>
                                                         <tbody>
-                                                            <tr>
+                                                            {/* <tr>
                                                                 <td>Sub Total</td>
                                                                 <td className="text-end">{invoiceData.subtotal}</td>
                                                             </tr>
@@ -362,7 +364,7 @@ const ReuseInvoicedetails = (params) => {
                                                             <tr>
                                                                 <td>CGST (%)<small className="text-muted"></small></td>
                                                                 <td className="text-end">{invoiceData.CGST}</td>
-                                                            </tr>
+                                                            </tr> */}
                                                             
                                                             <tr className="border-top border-top-dashed fs-15">
                                                                 <th scope="row">Total Amount</th>

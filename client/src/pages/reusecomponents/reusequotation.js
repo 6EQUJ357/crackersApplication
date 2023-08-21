@@ -173,13 +173,13 @@ const ReuseQuotation = (params) => {
                                 <input type="text" className="form-control" placeholder="Search for QuotationNo or Client..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href='#a'>Print</a></li>
                                     <li><a className="dropdown-item" href='#a'>Export to Excel</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                            </div>
                         </div>
                     </div>                  
@@ -218,7 +218,7 @@ const ReuseQuotation = (params) => {
                                                     </td>
                                                     <td>{res.vendoremail}</td>
                                                     <td>{res.dateofpurchase}</td>
-                                                    <td>{res.totalAmount}</td>
+                                                    <td>{res.totalAmount}</td> 
                                                     <td><span className="badge badge-soft-success p-2">{res.paymentstatus}</span></td>
                                                     <td>
                                                         <div className="dropdown">

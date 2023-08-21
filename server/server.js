@@ -262,7 +262,8 @@ app.post("/signin", async(req,res)=>{
             return res.send({status:400, message:"Invalid Email..."})
         }
          // Compare bcrypt hash of password and signin password
-         const passwordMatch = await bcrypt.compare(password, exist.password);
+         const passwordMatch = await bcrypt.compare(password, exist.password);   
+         //console.log("first", password, exist.password);  
 
          if (!passwordMatch) {
              return res.json({status : 400, response : false, message: 'Invalid Password Credential' }); //Passwords do not match
@@ -686,18 +687,18 @@ app.post("/invoicetransaction", async(req,res)=>{
     try{
        // console.log("invoicetransaction", req.body)
 
-       const {invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, producttype, rows} = req.body;
+       const {invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber,totalAmount, receiveAmount, producttype, rows} = req.body;
 
        let exist = await AddinvoiceModel.findOne({invoiceno : invoiceno});
 
        if(!exist){
 
-       let savepurchase = new AddinvoiceModel({invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, producttype, rows});
+       let savepurchase = new AddinvoiceModel({invoiceno, dateofpurchase, paymentstatus, lotnumber, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, totalAmount, receiveAmount, producttype, rows});
 
        await savepurchase.save();
        }
        else{
-        return res.json({status: 400, message :"Resultin Error For Generating Invoice"});
+        return res.json({status: 400, message :"Result in Error For Generating Invoice"});
        }
 
 
@@ -915,11 +916,19 @@ app.put("/editregisteruserdetails/:id", async(req,res)=>{
 
 app.post("/quotationtransaction", async(req,res)=>{
     try{
-        let {quotationno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, rows} = req.body;
+        let {quotationno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, totalAmount, producttype, rows} = req.body;
 
-        let saveData = new QuotationTransactionModel({quotationno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, rows});
+        let exist = await AddinvoiceModel.findOne({quotationno : quotationno});
+
+        if(!exist){
+
+        let saveData = new QuotationTransactionModel({quotationno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber,totalAmount, producttype, rows});
 
         await saveData.save().then(respo=> res.send({status:200, message : "Quotation Added..."})).catch(err=> console.log(err));
+        }
+        else{
+            return res.json({status: 400, message :"Result in Error For Generating Quotation"});
+           }
 
     }
     catch(err){
@@ -959,19 +968,19 @@ app.delete("/deletequotationtransaction/:id", async(req,res)=>{
 
 app.post("/purchasetransaction", async(req,res)=>{
     try{
-        const {purchaseno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, rows} = req.body;
+        const {purchaseno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber,  totalAmount, receiveAmount, producttype, rows} = req.body;
 
-        let exist = PurchaseModel.findOne({purchaseno : purchaseno});
+        let exist =await PurchaseModel.findOne({purchaseno : purchaseno});
 
         if(!exist){
 
-        let savepurchase = new PurchaseModel({purchaseno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, subtotal, SGST, CGST, totalAmount, receiveAmount, rows});
+        let savepurchase = new PurchaseModel({purchaseno, dateofpurchase, paymentstatus, vendorname, vendorGSTno, vendoremail, vendornumber, vendoraddress, paymentmethod, holdername, cardnumber, totalAmount, receiveAmount, producttype, rows});
 
         await savepurchase.save();
         }
         else{
-            return res.json({status: 400, message :"Resultin Error For Generating Invoice"});
-        }
+            return res.json({status: 400, message :"Result in Error For Generating Invoice"});
+        } 
 
 
         // for(let i=0; i < rows.length;){
@@ -1024,7 +1033,7 @@ app.post("/purchasetransaction", async(req,res)=>{
                 results.push({ status: 404, message: 'Failed to update the product...' });
                 } else {
                 // If product update succeeds, add a success message to the results array
-                results.push({ status: 200, message: 'generate invoice successfully...' });
+                results.push({ status: 200, message: 'generate Invoice successfully...' });
                 }
             })
             .catch(error => {
@@ -1036,7 +1045,7 @@ app.post("/purchasetransaction", async(req,res)=>{
 
         //Send the accumulated results as a response
         res.send(results);
-
+  
     } 
     catch(err){
         console.log(err);

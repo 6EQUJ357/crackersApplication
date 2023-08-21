@@ -19,6 +19,11 @@ const ReuseAddPurchase = (params) => {
         const [items, setItems] = useState([]);
         //console.log("items", items);
 
+        const [productNameBasedOnProducyType, setproductNameBasedOnProducyType] = useState([]);
+
+
+        const uniqueArrayProductType = [...new Set(items.map(list=>list.producttype))];
+
         useEffect(()=>{
             axios.get(`${API_BASE_URL}/allproductlist`).then(res=>setItems(res.data)).catch(err=>console.log(err));
         
@@ -38,11 +43,12 @@ const ReuseAddPurchase = (params) => {
         paymentmethod : "",
         holdername : "",
         cardnumber : "",
-        subtotal : "",
-        SGST : "",
-        CGST : "",
+        // subtotal : "",
+        // SGST : "",
+        // CGST : "",
         totalAmount : "",
         receiveAmount : "",
+        producttype : "",
         rows: []
         
     },
@@ -58,14 +64,23 @@ const ReuseAddPurchase = (params) => {
         paymentmethod : Yup.string().required("Choose Payment Method"),
         holdername : Yup.string().required("Name Required"), 
         cardnumber : Yup.string().required("Enter Card Number").length(19),
-        receiveAmount : Yup.string().required("Enter Amount To Be Paid At Initial")
+        receiveAmount : Yup.string().required("Enter Amount To Be Paid At Initial"),
+        producttype : Yup.string().required("Specify Type")
     }),
     onSubmit :async(values, {resetForm})=>{
+        //console.log("first", values)
 
-         await axios.post(`${API_BASE_URL}/purchasetransaction`, values).then(res=>alert(res.data[0].message)).catch(err=>console.log(err))
+         await axios.post(`${API_BASE_URL}/purchasetransaction`, values).then(res=>{   
+            alert(res.data[0].message)
 
-         navigate('/purchasedetails', { state: values });
-      //  console.log("values", values)
+            if(res.data[0].status === 200){
+                navigate('/purchasedetails', { state: values });
+                //console.log("values", values)
+            }
+        }
+            ).catch(err=>console.log(err))
+
+           resetForm({values : ""});
 
     }
     
@@ -82,13 +97,13 @@ const handleAddRow = () => {
     const newRow = {
       sno: formik.values.rows.length + 1,
       productname : "",
-      producttype : "",
+    //   producttype : "",
       productprice : "",
       quantity : "",
-      tax : "",
+    //   tax : "",
       amount : "",
-      taxableAmount : "",
-      hsncode : "",
+    //   taxableAmount : "",
+    //   hsncode : "",
     };
 
     formik.setFieldValue('rows', [...formik.values.rows, newRow]);
@@ -104,6 +119,9 @@ const handleInputChange = (e, index) => {
   };
 
   
+
+ 
+
 //productname handle change
 const handleNameChange = (e, index)=>{
     const { value } = e.target;
@@ -115,18 +133,25 @@ const handleNameChange = (e, index)=>{
     const ind = items.findIndex(list=>list.productname === value); //product name index
 
     if(value === items[ind]?.productname) {
-        updatedRows[index].producttype = items[ind].producttype;
+        // updatedRows[index].producttype = items[ind].producttype;
         updatedRows[index].productprice = items[ind].productprice;
         // updatedRows[index].productprice = items[ind].productprice;
 
         formik.setFieldValue('rows', updatedRows);
     }
     else{
-        updatedRows[index].producttype =""; 
+        // updatedRows[index].producttype =""; 
         updatedRows[index].productprice ="";
         formik.setFieldValue('rows', updatedRows);
     } 
    
+  }
+
+  const handleTyprChange = (e)=>{
+    const { value } = e.target;
+    formik.setFieldValue("producttype", value);
+   
+    setproductNameBasedOnProducyType(items.filter(list=>list.producttype === e.target.value)); 
   }
 
 
@@ -147,7 +172,8 @@ const handleNameChange = (e, index)=>{
       //sub total
       let amountts = updatedRows.reduce((a,b)=>{ return a+Number(b.amount)},0);
        
-     formik.setFieldValue('subtotal', amountts.toFixed(2).toString());  
+     //formik.setFieldValue('subtotal', amountts.toFixed(2).toString());  
+     formik.setFieldValue('totalAmount', amountts.toFixed(2).toString());  
 
   }
 
@@ -193,31 +219,31 @@ const handleNameChange = (e, index)=>{
 
 
 // calculate taxable amount througH tax field
-const handleTaxChange = (e, index)=>{
-    const { value } = e.target;
+// const handleTaxChange = (e, index)=>{
+//     const { value } = e.target;
 
-    const updatedRows = [...formik.values.rows];
-    updatedRows[index].tax = value;
-    formik.setFieldValue('rows', updatedRows);
+//     const updatedRows = [...formik.values.rows];
+//     updatedRows[index].tax = value;
+//     formik.setFieldValue('rows', updatedRows);
 
-    //taxable amount
-    let amount = Number(updatedRows[index].amount); 
-    let taxableamounts = amount * (Number(e.target.value) / 100);
-    updatedRows[index].taxableAmount = taxableamounts.toString();
-    formik.setFieldValue('rows', updatedRows);
+//     //taxable amount
+//     let amount = Number(updatedRows[index].amount); 
+//     let taxableamounts = amount * (Number(e.target.value) / 100);
+//     updatedRows[index].taxableAmount = taxableamounts.toString();
+//     formik.setFieldValue('rows', updatedRows);
 
-    //SGST
-    let estTax = updatedRows.reduce((a,b)=>{ return a+Number(b.taxableAmount)},0);
-    let halftax = estTax / 2;
-    formik.setFieldValue('SGST', halftax.toFixed(2).toString());
+//     //SGST
+//     let estTax = updatedRows.reduce((a,b)=>{ return a+Number(b.taxableAmount)},0);
+//     let halftax = estTax / 2;
+//     formik.setFieldValue('SGST', halftax.toFixed(2).toString());
 
-    //CGST
-    formik.setFieldValue('CGST', halftax.toFixed(2).toString());
+//     //CGST
+//     formik.setFieldValue('CGST', halftax.toFixed(2).toString());
 
-    //totalAmount
-     let totalAmo = Number(formik.values.subtotal) + estTax;
-     formik.setFieldValue('totalAmount', totalAmo.toFixed(2).toString());
-  }
+//     //totalAmount
+//      let totalAmo = Number(formik.values.subtotal) + estTax;
+//      formik.setFieldValue('totalAmount', totalAmo.toFixed(2).toString());
+//   }
  
 
   //delete row
@@ -233,21 +259,22 @@ const handleTaxChange = (e, index)=>{
     //sub total
     let amountts = updatedRows.reduce((a,b)=>{ return a+Number(b.amount)},0);
 
-    formik.setFieldValue('subtotal', amountts.toFixed(2).toString());
+    //formik.setFieldValue('subtotal', amountts.toFixed(2).toString());
+    formik.setFieldValue('totalAmount', amountts.toFixed(2).toString());
 
    
 
-    //SGST
-    let estTax = updatedRows.reduce((a,b)=>{ return a+Number(b.taxableAmount)},0);
-    let halftax = estTax / 2;
-    formik.setFieldValue('SGST', halftax.toFixed(2).toString());
+    // //SGST
+    // let estTax = updatedRows.reduce((a,b)=>{ return a+Number(b.taxableAmount)},0);
+    // let halftax = estTax / 2;
+    // formik.setFieldValue('SGST', halftax.toFixed(2).toString());
 
-    //CGST
-    formik.setFieldValue('CGST', halftax.toFixed(2).toString());
+    // //CGST
+    // formik.setFieldValue('CGST', halftax.toFixed(2).toString());
 
-    //totalAmount
-     let totalAmo = Number(amountts) + estTax;
-     formik.setFieldValue('totalAmount', totalAmo.toFixed(2).toString()); 
+    // //totalAmount
+    //  let totalAmo = Number(amountts) + estTax;
+    //  formik.setFieldValue('totalAmount', totalAmo.toFixed(2).toString()); 
     }
 
   };
@@ -377,7 +404,33 @@ const handlePaymentMethodOnCash = (e)=>{
 
                                     <div className="card-body border-bottom border-bottom-dashed p-4">
                                         <div className="row">
-                                            <div className="col-lg-6">
+
+                                            <div className='row'> 
+                                            <div className='col-lg-4 col-0'></div>
+                                                <div className='col-lg-4 col-12'>
+                                                {params.value3 && 
+                                                    <div className="profile-user mx-auto  mb-3">
+                                                        {/* <input id="profile-img-file-input" type="file" className="profile-img-file-input" /> */}
+
+                                                        <label htmlFor="profile-img-file-input" className='addinvoice_lable'  tabIndex="0" style={{width:"20rem"}}>
+
+                                                            <span className="overflow-hidden d-flex align-items-center justify-content-center rounded">
+
+                                                                <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark user-profile-image img-fluid c_profile_addinvoice_img" alt="logo dark" />
+
+                                                                <span className='c_profile_name c_profile_addinvoice_name' >{params.value3?.[0].company_name}</span>
+                                                                
+                                                                {/* <img src={params.value3?.[0].company_logo} className="card-logo card-logo-light user-profile-image img-fluid" alt="logo light" /> */}
+                                                            </span>
+                                                        </label>
+                                                    </div> 
+                                                }
+                                                 </div>
+                                                <div className='col-lg-4 col-0'></div>
+
+                                            </div>
+
+                                            <div className="col-lg-6 col-12">
                                                 <div className="row g-3">
                                                     <div className="col-lg-8 col-sm-6">
                                                         <label htmlFor="purchasenoInput">Invoice No</label>
@@ -397,49 +450,40 @@ const handlePaymentMethodOnCash = (e)=>{
                                                         {(formik.touched.dateofpurchase && formik.errors.dateofpurchase) ? <small style={{color:"red"}}>{formik.errors.dateofpurchase}</small> : null}
 
                                                     </div>
-                                                    {/*end col*/}
-                                                    <div className="col-lg-8 col-sm-6">
-                                                        <label htmlFor="choices-payment-status">Payment Status</label>
-                                                        <div className="input-light">
-                                                            <select className="form-control bg-light border-0" data-choices data-choices-search-false id="choices-payment-status" name='paymentstatus' value={formik.values.paymentstatus} onChange={paymentStatusHandle}>
-                                                                <option>--Select Payment Status--</option>
-                                                                <option value="Paid">Paid</option>
-                                                                <option value="Unpaid">Unpaid</option>
-                                                                <option value="Pending">Pending</option>
-                                                            </select>
-                                                        </div>
-                                                        {(formik.touched.paymentstatus && formik.errors.paymentstatus) ? <small style={{color:"red"}}>{formik.errors.paymentstatus}</small> : null}
+
+                                                    <div className="col-lg-8 col-sm-6 mb-5">
+                                                        <label htmlFor="choices-payment-status">Category</label>
+                                                         <div className="input-light">
+                                                               {/* <input list="brow1" name={`rows[${index}].producttype`} id="productName-11"  onChange={(e) => handleTyprChange(e, index)} />  */}
+
+                                                               <input list="brow1" name="producttype" id="productName-11"  onChange={(e) => handleTyprChange(e)} autoComplete='off'/> 
+
+                                                                <datalist id="brow1"  >
+                                                                    {uniqueArrayProductType.map((list,id)=>
+                                                                    <option key={id} value={list}>{list}</option>)}
+                                                                </datalist> 
+                                                                </div> 
+
+                                                                {(formik.errors.producttype && formik.touched.producttype) && <div style={{color:"red"}}>{formik.errors.producttype}</div>}
+                                                        
                                                     </div>
+
                                                     {/*end col*/}
-                                                    <div className="col-lg-8 col-sm-6">
+                                                   
+                                                    {/*end col*/}
+                                                    {/* <div className="col-lg-8 col-sm-6">
                                                         <div>
                                                             <label htmlFor="totalamountInput">Total Amount</label>
                                                             <input type="text" className="form-control bg-light border-0" id="totalamountInput" placeholder="₹0.00" readOnly = "readonly" name='totalAmount' value={formik.values.totalAmount} />
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     {/*end col*/}
                                                 </div>
                                                 
                                             </div>
                                             {/*end col*/}
                                             <div className="col-lg-4 ms-auto">
-                                            {params.value3 && 
-                                                    <div className="profile-user mx-auto  mb-3">
-                                                        {/* <input id="profile-img-file-input" type="file" className="profile-img-file-input" /> */}
-
-                                                        <label htmlFor="profile-img-file-input" className='addinvoice_lable'  tabIndex="0" style={{width:"20rem"}}>
-
-                                                            <span className="overflow-hidden border border-dashed d-flex align-items-center justify-content-center rounded">
-
-                                                                <img src={`${API_BASE_URL}/companyprofileimg/${params.value3?.[0].company_logo}`}  className="card-logo card-logo-dark user-profile-image img-fluid c_profile_addinvoice_img" alt="logo dark" />
-
-                                                                <span className='c_profile_name c_profile_addinvoice_name' >{params.value3?.[0].company_name}</span>
-                                                                
-                                                                {/* <img src={params.value3?.[0].company_logo} className="card-logo card-logo-light user-profile-image img-fluid" alt="logo light" /> */}
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                }
+                                           
 
 
                                                 <div className="mb-2">
@@ -491,12 +535,13 @@ const handlePaymentMethodOnCash = (e)=>{
                                    
                                     <div className="card-body p-2">
                                         <div className="table-responsive">
-                                            <table className="invoice-table table table-borderless table-nowrap mb-0">
+                                            <table className="invoice-table table table-borderless table-nowrap mb-0" autocomplete='off'>
                                                 <thead className="align-middle">
                                                     <tr className="table-active">
                                                     <th>S.no</th>
+                                                    {/* <th scope="col" >Category</th> */}
                                                     <th scope="col" >Product Name</th>
-                                                        <th scope="col" >Category</th>
+                                                        
                                                         <th scope="col" >
                                                             <div className="d-flex currency-select input-light align-items-center">
                                                                 Rate (₹)
@@ -509,10 +554,10 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             </div>
                                                         </th>
                                                         <th scope="col" >Quantity</th>
-                                                        <th scope="col" className="text-end" >Amount</th>
-                                                        <th scope="col" className="text-end" >Tax (%)</th>
+                                                        <th scope="col" >Amount</th>
+                                                        {/* <th scope="col" className="text-end" >Tax (%)</th>
                                                         <th scope="col" className="text-end">Taxable Amount</th>
-                                                        <th scope="col" className="text-end">HSN Code</th>
+                                                        <th scope="col" className="text-end">HSN Code</th> */}
                                                         <th scope="col" className="text-end"></th>
                                                     </tr>
                                                 </thead>
@@ -525,16 +570,28 @@ const handlePaymentMethodOnCash = (e)=>{
 
                                                     <td>{row.sno}</td>
 
+                                                    {/* <td className="text-start">
+                                                        <div className="mb-2 position-relative">
+
+                                                        <input list="brow1" name={`rows[${index}].producttype`} id="productName-11"  onChange={(e) => handleTyprChange(e, index)} autoComplete='off' className='product_name'/>
+
+                                                                <datalist id="brow1"  >
+                                                                    {uniqueArrayProductType.map((list,id)=>
+                                                                    <option key={id} value={list}>{list}</option>)}
+                                                                </datalist>                                                          
+                                                         </div>
+                                                    </td> */}
+
                                                     <td className="product-id" >
                                                             <div className="mb-2 position-relative">
 
-                                                            <input list="brow" name={`rows[${index}].productname`} id="productName-1" onChange={(e) => handleNameChange(e, index)} />
+                                                            <input list="brow" name={`rows[${index}].productname`} id="productName-1" onChange={(e) => handleNameChange(e, index)} className='product_name'/>
                                                             {/* <span className="down_arrow_style"><i className="las la-angle-down fs-20 ms-1"></i></span> */}
 
-                                                                    <datalist id="brow"  >
-                                                                    {items.map((list,id)=>
-                                                                    <option key={id} value={list.productname}>{list.productname}</option>)}
-                                                                    </datalist> 
+                                                                     <datalist id="brow"  >
+                                                                        {productNameBasedOnProducyType && productNameBasedOnProducyType.map((list,id)=>
+                                                                        <option key={id} value={list.productname}>{list.productname}</option>)}
+                                                                        </datalist> 
 
                                                                 {/* <input className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].productname`}  value={formik.values.rows[index].productname} onChange={formik.handleChange} placeholder='Product Name'/>                                                            */}
                                                                
@@ -544,19 +601,11 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             </div>
                                                     </td>
 
-                                                    <td className="text-start">
-                                                        <div className="mb-2">
-
-                                                        <input className="form-control bg-light border-0" id="productName-1" name={`rows[${index}].producttype`}  value={row.producttype}  onChange={(e) => handleInputChange(e, index)} readOnly />
-                                                          
-                                                                {/* {formik.errors.rows && formik.errors.rows[index]?.producttype && (
-                                                                            <div>{formik.errors.rows[index].producttype}</div>
-                                                                        )}                                                             */}                                                          
-                                                         </div>
-                                                    </td>
+                                                    
 
                                                     <td>
-                                                     <input type="text" className="form-control product-price bg-light border-0" id="productRate-1" placeholder='0' name={`rows[${index}].productprice`} value={row.productprice}  onChange={(e) => handleInputChange(e, index)} readOnly />
+                                                        <div className="input-step w-75">
+                                                     <input type="text" className="form-control product-price  border-0 product_name" id="productRate-1" placeholder='0' name={`rows[${index}].productprice`} value={row.productprice}  onChange={(e) => handleInputChange(e, index)} readOnly />
 
                                                         <div className="invalid-feedback">
                                                             Please enter a rate
@@ -564,12 +613,13 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             {/* {formik.errors.rows && formik.errors.rows[index]?.productprice && (
                                                                         <div>{formik.errors.rows[index].productprice}</div>
                                                                     )}    */}
+                                                    </div>
                                                     </td>
                                                     
                                                         <td>
-                                                            <div className="input-step"> 
+                                                            <div className="input-step w-75"> 
                                                                 {/* <button type="button" className='minus' onClick={()=>decrementquantity(index)}>–</button> */}
-                                                                <input type="text" className="product-quantity" id="product-qty-1"  name={`rows[${index}].quantity`} value={row.quantity} onChange={(e) => handleAmountChange(e, index)}/>
+                                                                <input type="text" className="product-quantity product_name" id="product-qty-1"  name={`rows[${index}].quantity`} value={row.quantity} onChange={(e) => handleAmountChange(e, index)}/>
                                                                 {/* <button type="button" className='plus'onClick={()=>incrementquantity(index)}>+</button> */}
                                                                     {/* {formik.errors.rows && formik.errors.rows[index]?.quantity && (
                                                                             <div>{formik.errors.rows[index].quantity}</div>
@@ -577,18 +627,18 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             </div>
                                                         </td>
                                                        
-                                                        <td className="text-start">
-                                                            <div>
-                                                            <input type="text" className="form-control bg-light border-0 product-line-price" id="productPric-1" placeholder="₹0.00" readOnly = "readonly" name={`rows[${index}].amount`} value={row.amount}  onChange={(e) => handleInputChange(e, index)}/>
+                                                        <td >
+                                                            <div className='input-step w-100'>
+                                                            <input type="text" className="form-control border-0 product-line-price" style={{width:"100px"}} id="productPric-1" placeholder="₹0.00" readOnly = "readonly" name={`rows[${index}].amount`} value={row.amount}  onChange={(e) => handleInputChange(e, index)}/>
                                                             </div>
                                                         </td>
-                                                        <td className="text-end">
+                                                        {/* <td className="text-end">
                                                             <div>
                                                             <input type="text" className="form-control bg-light border-0 product-line-price" id="productPrice1" placeholder="₹0.00" name={`rows[${index}].tax`} value={row.tax} onChange={(e) => handleTaxChange(e, index)} />
                                                             </div>
                                                                {/* {formik.errors.rows && formik.errors.rows[index]?.tax && (
                                                                             <div>{formik.errors.rows[index].tax}</div>
-                                                                        )}  */}                                                        
+                                                                        )}                                                         
                                                         </td>
                                                         <td className="text-end">
                                                             <div>
@@ -602,7 +652,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             <input type='text' className="product-quantity" id="hsn-code" placeholder="code" name="hsncode" value={row.hsncode} onChange={(e) => handleInputChange(e, index)}/>
                                                                
                                                             </div>
-                                                        </td>
+                                                        </td> */}
 
                                                         <td className="product-removal">
                                                         <button type='button' onClick={(e)=>handleDeleteRow(index)} className="btn btn-success">Delete</button>
@@ -618,12 +668,12 @@ const handlePaymentMethodOnCash = (e)=>{
                                                             <button id="add-item" type='button' onClick={handleAddRow} className="btn btn-soft-secondary fw-medium"><i className="ri-add-fill me-1 align-bottom"></i> Add Item</button>
                                                         </td>
                                                     </tr>
-                                                     <tr className="border-top border-top-dashed mt-2">
+                                                     <tr className="border-top border-top-dashed mt-2"> 
                                                         <td colspan="3"></td>
                                                         <td colspan="2" className="p-0">
                                                             <table className="table table-borderless table-sm table-nowrap align-middle mb-0">
                                                                 <tbody>
-                                                                    <tr>
+                                                                    {/* <tr>
                                                                         <th scope="row">Sub Total</th>
                                                                         <td >
                                                                             <input type="text" className="form-control bg-light border-0" id="cart-subtotal" placeholder="₹0.00" readOnly = "readonly" name="subtotal" value={formik.values.subtotal} style={{width:"100px"}}/>
@@ -642,7 +692,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                                         <td>
                                                                         <input type="text" className="form-control bg-light border-0" id="cart-discount" placeholder="₹0.00" name='CGST' value={formik.values.CGST} readOnly  onChange={formik.values.CGST} style={{width:"100px"}} />
                                                                         </td>
-                                                                    </tr>
+                                                                    </tr> */}
                                                                    
                                                                     <tr className="border-top border-top-dashed">
                                                                         <th scope="row">Total Amount</th>
@@ -659,6 +709,20 @@ const handlePaymentMethodOnCash = (e)=>{
                                             </table>
                                             {/*end table */}
                                         </div>
+
+                                        <div className="col-lg-4 col-sm-6">
+                                                        <label htmlFor="choices-payment-status">Payment Status</label>
+                                                        <div className="input-light">
+                                                            <select className="form-control bg-light border-0" data-choices data-choices-search-false id="choices-payment-status" name='paymentstatus' value={formik.values.paymentstatus} onChange={paymentStatusHandle}>
+                                                                <option>--Select Payment Status--</option>
+                                                                <option value="Paid">Paid</option>
+                                                                <option value="Unpaid">Unpaid</option>
+                                                                <option value="Pending">Pending</option>
+                                                            </select>
+                                                        </div>
+                                                        {(formik.touched.paymentstatus && formik.errors.paymentstatus) ? <small style={{color:"red"}}>{formik.errors.paymentstatus}</small> : null}
+                                        </div>
+
                                         {formik.values.paymentstatus !== "Unpaid" &&
                                         <div className="row mt-3">
                                             <div className="col-lg-4">

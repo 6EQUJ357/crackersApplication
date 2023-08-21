@@ -759,7 +759,7 @@ const formatCardNumber = (e)=>{
                                 </div>
 
                                 <div className="mb-3">
-                                    <label for="vendorname" className="form-label">Vendor Name</label>
+                                    <label for="vendorname" className="form-label">Customer Name</label>
                                     <input type="text" className="form-control" id="vendorname" name='vendorname' {...formik.getFieldProps("vendorname")} readOnly />            
                                 </div>
 

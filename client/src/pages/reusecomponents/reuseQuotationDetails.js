@@ -158,14 +158,15 @@ const ReuseQuotationdetails = (params) => {
                                                 <div className="mt-sm-0 mt-3">
                                                     <p> <span className='c_profile_invoicedetaikls_name '>{params.value3?.[0].company_name}</span></p>
                                                     <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p>
+                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+
 
                                                 </div>
                                             </div>
 
                                             <div className="col-lg-4 col-4">
                                                 <div className="mt-sm-0 mt-3">
-                                                <h6 className="text-muted text-uppercase fw-semibold">Address</h6>
-                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+                                                {/* <h6 className="text-muted text-uppercase fw-semibold">Address</h6> */}
                                                     
                                                     <h6><span className="text-muted fw-normal">Email : </span><span id="email">{params.value3?.[0].email}</span></h6>
                                                     {/* <h6><span className="text-muted fw-normal">Website:</span> <a href="https://themesbrand.com/" className="link-primary" rel='noreferrer' target="_blank" id="website">www.themesbrand.com</a></h6> */}
@@ -182,7 +183,7 @@ const ReuseQuotationdetails = (params) => {
                                          <h3 className="fw-bold mb-4">Quotation No:{quotationData.quotationno} </h3>
                                          <div className="row g-4">
                                              <div className="col-lg-4 col-4">
-                                                 <p className="mb-1 text-uppercase fw-medium fs-14">Vendor Name : {quotationData.vendorname} </p>
+                                                 <p className="mb-1 text-uppercase fw-medium fs-14">Customer Name : {quotationData.vendorname} </p>
                                                  <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {quotationData.vendorGSTno}</span></h5>
                                              </div>
                                              {/*end col*/}
@@ -249,6 +250,11 @@ const ReuseQuotationdetails = (params) => {
                                              <span className="badge badge-soft-success fs-12">Due Date: {quotationData.dateofpurchase.substr(0,10)}</span>
                                      </div>
 
+                                     <div className="col-lg-4 col-4">
+                                            <p className=" mb-1 text-uppercase fw-medium fs-14">Category</p>
+                                            <span className="badge badge-soft-success fs-11" id="payment-status">{quotationData.producttype}</span>
+                                        </div>
+
                                  </div>
 
                                  <div className="row">
@@ -263,9 +269,9 @@ const ReuseQuotationdetails = (params) => {
                                                              <th scope="col" style={{width:"80px"}}>Rate</th>
                                                              <th scope="col" style={{width:"80px"}}>Quantity</th>
                                                              <th scope="col" style={{width:"80px"}}>Amount</th> 
-                                                             <th scope="col" style={{width:"80px"}}>Tax (%)</th>
+                                                             {/* <th scope="col" style={{width:"80px"}}>Tax (%)</th>
                                                              <th scope="col" style={{width:"10px"}}>Taxable Amount</th>
-                                                             <th scope="col" style={{width:"10px"}} className="text-end">HSN Code</th>   
+                                                             <th scope="col" style={{width:"10px"}} className="text-end">HSN Code</th>    */}
                                                         </tr>
                                                      </thead>
                                                      <tbody id="products-list">
@@ -274,14 +280,14 @@ const ReuseQuotationdetails = (params) => {
                                                              <th scope="row">{res.sno}</th>
                                                              <td className="text-start">
                                                                  <span className="fw-medium">{res.productname}</span>
-                                                                 <p className="text-muted mb-0">{res.producttype}</p>
+                                                                 {/* <p className="text-muted mb-0">{res.producttype}</p> */}
                                                              </td>
                                                              <td>{res.productprice}</td> 
                                                              <td>{res.quantity}</td>
                                                              <td>{res.amount}</td>
-                                                             <td>{res.tax}</td>
+                                                             {/* <td>{res.tax}</td>
                                                              <td className="text-end">{res.taxableAmount}</td>
-                                                             <td className="text-end">{res.hsncode}</td>
+                                                             <td className="text-end">{res.hsncode}</td> */}
                                                          </tr>
                                                          )}
                                                          {/* <tr>
@@ -320,7 +326,7 @@ const ReuseQuotationdetails = (params) => {
                                              <div className="border-top border-top-dashed mt-2">
                                                  <table className="table table-borderless table-nowrap align-middle mb-0 ms-auto" style={{width: "250px"}}>
                                                      <tbody>
-                                                         <tr>
+                                                         {/* <tr>
                                                              <td>Sub Total</td>
                                                              <td className="text-end">{quotationData.subtotal}</td>
                                                          </tr>
@@ -331,7 +337,7 @@ const ReuseQuotationdetails = (params) => {
                                                          <tr>
                                                              <td>CGST (%)<small className="text-muted"></small></td>
                                                              <td className="text-end">{quotationData.CGST}</td>
-                                                         </tr>
+                                                         </tr> */}
                                                          
                                                          <tr className="border-top border-top-dashed fs-15">
                                                              <th scope="row">Total Amount</th>

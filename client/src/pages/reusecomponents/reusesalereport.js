@@ -161,16 +161,16 @@ const ReuseSalereport = (params) => {
                            </div>
                         </div>
 
-                        <div className="col-sm-auto ms-auto">
+                        {/* <div className="col-sm-auto ms-auto">
                             <div className="d-flex gap-2">
-                                {/* <button type="button" className="btn btn-soft-primary fs-14"><i className="las la-filter fs-16 align-middle me-2"></i>Filter</button> */}
+                                <button type="button" className="btn btn-soft-primary fs-14"><i className="las la-filter fs-16 align-middle me-2"></i>Filter</button>
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href='#a'>Print</a></li>
                                     <li><a className="dropdown-item" href='#a'>Export to Excel</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="row">

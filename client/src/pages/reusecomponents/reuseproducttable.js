@@ -238,7 +238,7 @@ const viewPurchase = (res)=>{
                                 <input type="text" className="form-control" id="searchMemberList" placeholder="Search for Result" name="searchProducts" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
-                            <div className="">
+                            {/* <div className="">
                                 <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" className="btn btn-soft-info btn-icon fs-14"><i className="las la-ellipsis-v fs-18"></i></button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                     <li><a className="dropdown-item" href="#a">All</a></li>
@@ -246,7 +246,7 @@ const viewPurchase = (res)=>{
                                     <li><a className="dropdown-item" href="#a">Last Month</a></li>
                                     <li><a className="dropdown-item" href="#a">Last Year</a></li>
                                 </ul>
-                            </div>
+                            </div> */}
                            </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@ const viewPurchase = (res)=>{
                                                     <th scope="col">Category</th>
                                                     {/* <th scope="col">No.Of Items</th> */}
                                                     <th scope="col">Outward</th>
-                                                    <th scope="col">OutPut Tax</th>
+                                                    {/* <th scope="col">OutPut Tax</th> */}
                                                     <th scope="col" style={{width: "16%"}}>Date Of Update</th>
                                                     <th scope="col" style={{width: "6%"}}>Action</th>
                                                 </tr>
@@ -322,10 +322,10 @@ const viewPurchase = (res)=>{
                                                         <td>{res.rows.map(list=>list.producttype)[0]}</td>
                                                         
 
-                                                        <td><div>{res.rows.map(list=>list.quantity).reduce((a,b) =>a+b)}</div></td>
+                                                        <td><div>{res.rows.map(list=>Number(list.quantity)).reduce((a,b) =>a+b)}</div></td>
 
 
-                                                        <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td>
+                                                        {/* <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td> */}
                                                         
                                                         <td><div>{res.dateofpurchase}</div></td>
                                                        
@@ -384,7 +384,7 @@ const viewPurchase = (res)=>{
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=> list.rows.map(qua=> qua.quantity).reduce((a,b)=> Number(a) + Number(b) )).reduce((a,b)=> {return Number(a) + Number(b)}, 0)}</td> 
-                                                    <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>
+                                                    {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                     <td></td>
                                                  </tr>
@@ -453,7 +453,7 @@ const viewPurchase = (res)=>{
                                                     <th scope="col">Category</th>
                                                     {/* <th scope="col">No.Of Items</th> */}
                                                     <th scope="col" >Inward</th>
-                                                    <th scope="col">Input Tax</th>
+                                                    {/* <th scope="col">Input Tax</th> */}
                                                     <th scope="col" style={{width: "16%"}}>Date Of Update</th>
                                                     <th scope="col" style={{width: "6%"}}>Action</th>
                                                 </tr>
@@ -499,10 +499,10 @@ const viewPurchase = (res)=>{
 
                                                         <td>{res.rows.map(list=>list.producttype)[0]}</td>
 
-                                                        <td><div>{res.rows.map(list=>list.quantity).reduce((a,b) =>a+b)}</div></td>
+                                                        <td><div>{res.rows.map(list=>Number(list.quantity)).reduce((a,b) =>a+b)}</div></td>
                                                         
 
-                                                        <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td>
+                                                        {/* <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td> */}
 
                                                         
                                                         <td><div>{new Date(res.dateofpurchase).toLocaleString()}</div></td>
@@ -562,7 +562,7 @@ const viewPurchase = (res)=>{
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData1.map(list=> list.rows.map(qua=> qua.quantity).reduce((a,b)=> Number(a) + Number(b) )).reduce((a,b)=> {return Number(a) + Number(b)}, 0)}</td>  
-                                                    <td>{ (currentData1.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>
+                                                    {/* <td>{ (currentData1.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                     <td></td>
                                                  </tr>

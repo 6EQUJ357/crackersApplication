@@ -17,6 +17,7 @@ const ReuseSalePaymentsummary = (params) => {
 
 
     const [invoice, setinvoice] = useState([]);
+    //console.log("qqqqq", invoice);
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 15; // Number of items to display per page
@@ -193,7 +194,9 @@ const ReuseSalePaymentsummary = (params) => {
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Invoice ID</th>
                                                     <th scope="col">Client</th>
-                                                    <th scope="col">Billed</th>
+                                                    <th scope="col">Billed Amount</th>
+                                                    <th scope="col">received Amount</th>
+                                                    <th scope="col">Balance Amount</th>
                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                     <th scope="col" style={{width: "12%"}}>Action</th>
                                                 </tr>
@@ -208,6 +211,8 @@ const ReuseSalePaymentsummary = (params) => {
                                                         <p className="text-body align-middle fw-medium">{list.vendorname}</p>
                                                     </td>
                                                     <td>{list.totalAmount}</td>
+                                                    <td>{list.receiveAmount}</td>
+                                                    <td>{Number(list.totalAmount)- Number(list.receiveAmount)}</td>
                                                     <td><span className="badge badge-soft-success p-2">{list.paymentmethod}</span></td>
                                                     <td>
                                                         <div className="dropdown">
@@ -257,8 +262,8 @@ const ReuseSalePaymentsummary = (params) => {
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=>list.totalAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(3))}</td>  
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{currentData.map(list=>list.receiveAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(2))}</td>  
+                                                    <td>{(Number(currentData.map(list=>list.totalAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(2))) + Number(currentData.map(list=>list.receiveAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(2)))).toFixed(2)}</td>   
                                                  </tr>
                                                 }
                                               
