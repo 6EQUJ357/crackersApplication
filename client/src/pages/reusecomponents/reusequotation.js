@@ -78,7 +78,7 @@ const ReuseQuotation = (params) => {
 
     const deletequotation = (id, name)=>{
 
-        let response = window.confirm(`you try to delect the #${name}...`);
+        let response = window.confirm(`you try to delect the Customer #${name}...`);
         if(response){
         axios.delete(`${API_BASE_URL}/deletequotationtransaction/${id}`).then(res=>setquotation(res.data)).catch(err=>console.log(err));
     }
@@ -170,7 +170,7 @@ const ReuseQuotation = (params) => {
                         <div className="col-sm-auto ms-auto">
                            <div className="d-flex gap-3">
                             <div className="search-box">
-                                <input type="text" className="form-control" placeholder="Search for QuotationNo or Client..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
+                                <input type="text" className="form-control" placeholder="Search for QuotationNo or Customer..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
                             {/* <div className="">
@@ -194,7 +194,7 @@ const ReuseQuotation = (params) => {
                                                 <tr className="text-muted text-uppercase">
                                                     
                                                     <th scope="col">Quotation ID</th>
-                                                    <th scope="col">Client</th>
+                                                    <th scope="col">Customer</th>
                                                     <th scope="col" style={{width: "20%"}}>Email</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Billed</th>

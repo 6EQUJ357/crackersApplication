@@ -153,7 +153,7 @@ const ReuseClientPurchseReport = (params) => {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 className="mb-sm-0">ClientWise Purchase Report</h4>
+                                <h4 className="mb-sm-0">Company Wise Purchase Report</h4>
 
                                 <div className="page-title-right">
                                     <ol className="breadcrumb m-0">
@@ -209,11 +209,11 @@ const ReuseClientPurchseReport = (params) => {
                                                         </div>
                                                     </th> */}
                                                     <th scope="col">Invoice ID</th>
-                                                    <th scope="col">Client</th>
+                                                    <th scope="col">Company</th>
                                                     <th scope="col" style={{width: "20%"}}>Email</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Billed</th>
-                                                    <th scope="col">Input Tax</th>
+                                                    {/* <th scope="col">Input Tax</th> */}
                                                     {/* <th scope="col" style={{width: "16%"}}>Status</th> */} 
                                                     <th scope="col" style={{width: "12%"}}>Action</th>
                                                 </tr>
@@ -236,7 +236,7 @@ const ReuseClientPurchseReport = (params) => {
                                                     <td>{res.vendoremail}</td>
                                                     <td>{new Date(res.dateofpurchase).toLocaleString()}</td>
                                                     <td>{res.totalAmount}</td>
-                                                    <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td>
+                                                    {/* <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td> */}
                                                     {/* <td><span className="badge badge-soft-success p-2">{res.paymentstatus}</span></td> */}
                                                     <td>
                                                         <div className="dropdown">
@@ -287,7 +287,7 @@ const ReuseClientPurchseReport = (params) => {
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=> list.totalAmount).reduce((a,b)=> {return Number(a) + Number(b)}, 0)}</td> 
-                                                    <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>
+                                                    {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                  </tr>
                                                 }

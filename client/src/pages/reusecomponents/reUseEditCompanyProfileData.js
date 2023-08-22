@@ -24,7 +24,7 @@ const ReuseEditsCompanyProfileData = (params) => {
     const formik = useFormik({
         initialValues : {
             company_name : viewcompanyProfile.company_name,
-            GST_No : viewcompanyProfile.GST_No,
+            GST_No : null,
             mobile_No : viewcompanyProfile.mobile_No,
             email : viewcompanyProfile.email, 
             address : viewcompanyProfile.address,
@@ -33,7 +33,7 @@ const ReuseEditsCompanyProfileData = (params) => {
         },
         validationSchema:Yup.object({
             company_name : Yup.string().required("Company Name Required"),
-            GST_No : Yup.string().required("Enter GST no."),
+            // GST_No : Yup.string().required("Enter GST no."),
             mobile_No : Yup.string().required('Phone number is required').matches(/^\d+$/, 'Phone number must only contain numbers').min(10, 'Phone number must be exactly 10 digits').max(10, 'Phone number must be exactly 10 digits'),
             email : Yup.string().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email address').required("Email Required"),
             address : Yup.string().required("Enter Address"),
@@ -178,14 +178,14 @@ const ReuseEditsCompanyProfileData = (params) => {
                                             </div>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        {/* <div className="col-md-6">
                                             <div className="mb-3">
                                                 <label className="form-label" for="product type">GST No.</label>
                                                     <input id="product type" name="GST_No"  type="text" className="form-control" {...formik.getFieldProps("GST_No")}/>
                                                     {formik.errors.GST_No ? <small style={{color:"red"}}>{formik.errors.GST_No}</small> : null}
 
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                         
                                         <div className="dropzone mb-3"> 
@@ -238,7 +238,7 @@ const ReuseEditsCompanyProfileData = (params) => {
                                         </div>
 
                                         <div className="hstack gap-2 mt-4">
-                                        <button type="submit" className="btn btn-primary">Update</button>
+                                        <button type="submit" className="btn btn-primary">Update Company Profile</button>
                                     </div> 
                                     </form>
 

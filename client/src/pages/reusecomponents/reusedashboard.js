@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Sidebar from '../components/sidebar'
 import Reusenavbar from './reusenavbar'
 import { Link } from 'react-router-dom'
@@ -8,7 +8,7 @@ import '../../App.css'
 
 const ReuseDashboard = (params) => {
 
-    console.table("dashboard", params.value3); 
+    //console.table("dashboard", params.value3); 
       
   return (
     <div>
@@ -54,7 +54,7 @@ const ReuseDashboard = (params) => {
 </div>{/* /.modal */}
 
        {/* ========== App Menu ========== */}
-        <div className="app-menu navbar-menu">
+        <div className="app-menu navbar-menu" >
 
             {/* side bar start*/}
 
@@ -98,42 +98,7 @@ const ReuseDashboard = (params) => {
                             <div className='row mt-3' >
 
                                 <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/addinvoice" className="btn btn-primary dlink" ><i className="las la-receipt"></i> Create Invoice</Link>
-                                </div>
-
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/invoice" className="btn btn-primary dlink" ><i className="las la-file-invoice"></i> All Invoice</Link> 
-                                </div>
-
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/registeruser" className="btn btn-primary dlink" ><i className="las la-user"></i> Client/Customer</Link> 
-                                </div>
-
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <div className="btn-group dlink">
-                                        <button type="button" className="btn btn-primary dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" >
-                                        <i className="las la-clipboard-list"></i> Reports
-                                        </button>
-                                            <ul className="dropdown-menu w-100">
-                                                <li><Link className="dropdown-item" to="/salepaymentsummary"><i className="las la-money-check"></i>&emsp;Payment Summary (Sales)</Link></li>
-                                                <li><Link className="dropdown-item" to="/purchasepaymentsummary"><i className="las la-money-check"></i>&emsp;Payment Summary (Purchase)</Link></li>
-                                                <li><Link className="dropdown-item" to="/salereport"><i className="las la-clipboard-check"></i>&emsp;Sale Report</Link></li>
-                                                <li><Link className="dropdown-item" to="/clientwisesalereport"><i className="las la-database"></i>&emsp;Client Wise Sale Report</Link></li>
-                                                <li><Link className="dropdown-item" to="/saleperiod"><i className="las la-clipboard-list"></i>&emsp;Sale Period</Link></li>
-                                                <li><Link className="dropdown-item" to="/purchasereport"><i className="las la-clipboard-check"></i>&emsp;Purchase Report</Link></li>
-                                                <li><Link className="dropdown-item" to="/clientwisepurchasereport"><i className="las la-database"></i>&emsp;Client Wise Purchase Report</Link></li>
-                                                <li><Link className="dropdown-item" to="/purchaseperiod"><i className="las la-clipboard-list"></i>&emsp;Purchase Period</Link></li>
-                                                {/* <li><Link className="dropdown-item" to="/expansesreport">&emsp;Expenses Report</Link></li> */}
-                                            </ul>
-                                    </div>
-                                </div>
-
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/quotation" className="btn btn-primary dlink" ><i className="las la-file-signature"></i> Quotation</Link> 
-                                </div>
-
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/purchase" className="btn btn-primary dlink" ><i className="las la-credit-card"></i> Purchase Products</Link> 
+                                <Link to="/invoice" className="btn btn-primary dlink" ><i className="las la-file-invoice"></i> All Invoice</Link> 
                                 </div>
 
                                 <div className='col-12 col-lg-6 dbutton'>
@@ -147,6 +112,50 @@ const ReuseDashboard = (params) => {
                                         </ul>
                                     </div>
 
+                                </div>
+
+                               
+
+                                <div className='col-12 col-lg-6 dbutton'>
+                                <Link to="/addinvoice" className="btn btn-primary dlink" ><i className="las la-receipt"></i> Create Invoice</Link>
+                                </div>
+
+                                <div className='col-12 col-lg-6 dbutton'>
+                                <Link to="/categories" className="btn btn-primary dlink" ><i className="las la-stream"></i> Categories</Link> 
+                                </div>
+
+                               
+                                <div className='col-12 col-lg-6 dbutton'>
+                                    <Link to="/purchase" className="btn btn-primary dlink" ><i className="las la-credit-card"></i> Purchase Products</Link> 
+                                </div>
+
+                                <div className='col-12 col-lg-6 dbutton'>
+                                    <div className="btn-group dlink">
+                                        <button type="button" className="btn btn-primary dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" >
+                                        <i className="las la-clipboard-list"></i> Reports
+                                        </button>
+                                            <ul className="dropdown-menu w-100">
+                                                <li><Link className="dropdown-item" to="/salepaymentsummary"><i className="las la-money-check"></i>&emsp;Payment Summary (Sales)</Link></li>
+                                                <li><Link className="dropdown-item" to="/purchasepaymentsummary"><i className="las la-money-check"></i>&emsp;Payment Summary (Purchase)</Link></li>
+                                                <li><Link className="dropdown-item" to="/salereport"><i className="las la-clipboard-check"></i>&emsp;Sale Report</Link></li>
+                                                <li><Link className="dropdown-item" to="/clientwisesalereport"><i className="las la-database"></i>&emsp;Customer Wise Sale Report</Link></li>
+                                                <li><Link className="dropdown-item" to="/saleperiod"><i className="las la-clipboard-list"></i>&emsp;Sale Period</Link></li>
+                                                <li><Link className="dropdown-item" to="/purchasereport"><i className="las la-clipboard-check"></i>&emsp;Purchase Report</Link></li>
+                                                <li><Link className="dropdown-item" to="/clientwisepurchasereport"><i className="las la-database"></i>&emsp;Company Wise Purchase Report</Link></li>
+                                                <li><Link className="dropdown-item" to="/purchaseperiod"><i className="las la-clipboard-list"></i>&emsp;Purchase Period</Link></li>
+                                                {/* <li><Link className="dropdown-item" to="/expansesreport">&emsp;Expenses Report</Link></li> */}
+                                            </ul>
+                                    </div>
+                                </div>
+
+
+                                <div className='col-12 col-lg-6 dbutton'>
+                                <Link to="/quotation" className="btn btn-primary dlink" ><i className="las la-file-signature"></i> Quotation</Link> 
+                                </div>
+
+
+                                <div className='col-12 col-lg-6 dbutton'>
+                                <Link to="/registeruser" className="btn btn-primary dlink" ><i className="las la-user"></i> Customer</Link> 
                                 </div>
 
                                 <div className='col-12 col-lg-6 dbutton'> 
@@ -164,9 +173,7 @@ const ReuseDashboard = (params) => {
 
                                 </div>
 
-                                <div className='col-12 col-lg-6 dbutton'>
-                                    <Link to="/categories" className="btn btn-primary dlink" ><i className="las la-stream"></i> Categories</Link> 
-                                </div>
+                                
 
                                 <div className='col-12 col-lg-6 dbutton'>
                                     <Link to="/users" className="btn btn-primary dlink" ><i className="las la-user-friends"></i> Users</Link> 

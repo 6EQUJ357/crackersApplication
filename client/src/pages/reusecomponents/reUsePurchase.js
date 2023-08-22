@@ -172,7 +172,7 @@ const Reusepurchase = (params) => {
                         <div className="col-sm-auto ms-auto">
                            <div className="d-flex gap-3">
                             <div className="search-box">
-                                <input type="text" className="form-control" placeholder="Search invoiceNo or Client..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
+                                <input type="text" className="form-control" placeholder="Search invoiceNo or Company..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
                             {/* <div className="">
@@ -324,7 +324,7 @@ const Reusepurchase = (params) => {
                                                         </div>
                                                     </th> */}
                                                     <th scope="col">Invoice ID</th>
-                                                    <th scope="col">Client</th>
+                                                    <th scope="col">Company</th>
                                                     <th scope="col" style={{width: "20%"}}>Email</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Billed</th>

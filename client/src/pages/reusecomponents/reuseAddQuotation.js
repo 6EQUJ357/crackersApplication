@@ -65,7 +65,7 @@ const ReuseAddQuotation = (params) => {
         dateofpurchase : dateTimeString,
         paymentstatus : "",
         vendorname : "",
-        vendorGSTno : "",
+        vendorGSTno : null,
         vendoremail : "",
         vendornumber : "",
         vendoraddress : "",
@@ -85,7 +85,7 @@ const ReuseAddQuotation = (params) => {
         dateofpurchase : Yup.string(),
         paymentstatus : Yup.string().required("Select Payment Status"),
         vendorname : Yup.string().required("Name Required"),
-        vendorGSTno: Yup.string().required("Enter GST no"),
+        // vendorGSTno: Yup.string().required("Enter GST no"),
         vendoremail : Yup.string().required("Email Required"),
         vendornumber : Yup.string().required("Number Required"),
         vendoraddress : Yup.string().required("Address Required"),
@@ -531,6 +531,7 @@ const changes = (e)=>{
                                             <div className="col-lg-6 ms-auto col-12">
 
                                                 <div className="mb-2">
+                                                    <lable>Customer Name</lable>
                                                     <select className="form-control bg-light border-0" id="vendorname"  name="vendorname" onChange={changes} >
                                                         <option>-- Select -- </option>
                                                         {registeruser.length > 0 && registeruser.map((res)=>
@@ -542,14 +543,14 @@ const changes = (e)=>{
 
                                                 </div>
 
-                                                <div className="mb-2">
+                                                {/* <div className="mb-2">
                                                     <input className="form-control bg-light border-0" id="vendorGSTno"  name="vendorGSTno" placeholder="GST no" {...formik.getFieldProps("vendorGSTno")} readOnly/>
                                                     <div className="invalid-feedback">
                                                         Please enter GST no
                                                     </div>
                                                     {(formik.touched.vendorGSTno && formik.errors.vendorGSTno) ? <small style={{color:"red"}}>{formik.errors.vendorGSTno}</small> : null}
 
-                                                </div>
+                                                </div> */}
 
 
                                                 {/* <div>

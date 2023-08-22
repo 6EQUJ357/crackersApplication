@@ -263,7 +263,7 @@ const formatCardNumber = (e)=>{
                         <div className="col-sm-auto ms-auto">
                            <div className="d-flex gap-3">
                             <div className="search-box">
-                                <input type="text" className="form-control" id="searchMemberList" placeholder="Search for Client" name='search' onChange={e=>setSearch(e.target.value)} />
+                                <input type="text" className="form-control" id="searchMemberList" placeholder="Search for Company" name='search' onChange={e=>setSearch(e.target.value)} />
                                 <i className="las la-search search-icon"></i>
                             </div>
                             {/* <div className="">
@@ -321,7 +321,7 @@ const formatCardNumber = (e)=>{
                                                             <thead className="table-light">
                                                                 <tr className="text-muted text-uppercase">
                                                                 <th scope="col">purchase ID</th>
-                                                                    <th scope="col">Client</th>
+                                                                    <th scope="col">Company</th>
                                                                     <th scope="col">Date</th>
                                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                                     <th scope="col" style={{width: "12%"}}>Amount</th>
@@ -414,7 +414,7 @@ const formatCardNumber = (e)=>{
                                                             <thead className="table-light">
                                                             <tr className="text-muted text-uppercase">
                                                                 <th scope="col">purchase ID</th>
-                                                                    <th scope="col">Client</th>
+                                                                    <th scope="col">Company</th>
                                                                     <th scope="col">Date</th>
                                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                                     <th scope="col" style={{width: "12%"}}>Amount</th>
@@ -507,7 +507,7 @@ const formatCardNumber = (e)=>{
                                                             <thead className="table-light">
                                                             <tr className="text-muted text-uppercase">
                                                                 <th scope="col">purchase ID</th>
-                                                                    <th scope="col">Client</th>
+                                                                    <th scope="col">Company</th>
                                                                     <th scope="col">Date</th>
                                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                                     <th scope="col" style={{width: "12%"}}>Amount</th>
@@ -599,7 +599,7 @@ const formatCardNumber = (e)=>{
                                                             <thead className="table-light">
                                                             <tr className="text-muted text-uppercase">
                                                                 <th scope="col">purchase ID</th>
-                                                                    <th scope="col">Client</th>
+                                                                    <th scope="col">Company</th>
                                                                     <th scope="col">Date</th>
                                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                                     <th scope="col" style={{width: "12%"}}>Amount</th>

@@ -36,7 +36,7 @@ const ReuseAddPurchase = (params) => {
         dateofpurchase : "",
         paymentstatus : "",
         vendorname : "",
-        vendorGSTno : "",
+        vendorGSTno : null,
         vendoremail : "",
         vendornumber : "",
         vendoraddress : "",
@@ -57,7 +57,7 @@ const ReuseAddPurchase = (params) => {
         dateofpurchase : Yup.string().required("Specify Date"),
         paymentstatus : Yup.string().required("Select Payment Status"),
         vendorname : Yup.string().required("Name Required"),
-        vendorGSTno: Yup.string().required("Enter GST no"),
+        // vendorGSTno: Yup.string().required("Enter GST no"),
         vendoremail : Yup.string().required("Email Required"),
         vendornumber : Yup.string().required("Number Required"),
         vendoraddress : Yup.string().required("Address Required"),
@@ -487,20 +487,21 @@ const handlePaymentMethodOnCash = (e)=>{
 
 
                                                 <div className="mb-2">
-                                                    <input className="form-control bg-light border-0" id="vendorname"  name="vendorname" placeholder="Vendor Name" value={formik.values.vendorname} onChange={vendorNameHandle} />                                                                                                     
+                                               
+                                                    <input className="form-control bg-light border-0" id="vendorname"  name="vendorname" placeholder="Company Name" value={formik.values.vendorname} onChange={vendorNameHandle} />                                                                                                     
                                                     
                                                     {(formik.touched.vendorname && formik.errors.vendorname) ? <small style={{color:"red"}}>{formik.errors.vendorname}</small> : null}
 
                                                 </div>
 
-                                                <div className="mb-2">
+                                                {/* <div className="mb-2">
                                                     <input className="form-control bg-light border-0" id="vendorGSTno"  name="vendorGSTno" placeholder="GST no" {...formik.getFieldProps("vendorGSTno")} />
                                                     <div className="invalid-feedback">
                                                         Please enter GST no
                                                     </div>
                                                     {(formik.touched.vendorGSTno && formik.errors.vendorGSTno) ? <small style={{color:"red"}}>{formik.errors.vendorGSTno}</small> : null}
 
-                                                </div>
+                                                </div> */}
                                             
                                                 <div className="mb-2">
                                                 <textarea className="form-control bg-light border-0" id="companyAddress" rows="3" placeholder="Company Address" name="vendoraddress" {...formik.getFieldProps("vendoraddress")} ></textarea>

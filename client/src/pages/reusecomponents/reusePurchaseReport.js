@@ -193,7 +193,7 @@ const viewPurchase = (res)=>{
                                                     <th scope="col"  style={{width: "20%"}}>Category</th>
                                                     {/* <th scope="col">No.Of Items</th> */}
                                                     <th scope="col" >Inward</th>
-                                                    <th scope="col">Input Tax</th>
+                                                    {/* <th scope="col">Input Tax</th> */}
                                                     <th scope="col" style={{width: "16%"}}>Date Of Update</th>
                                                     <th scope="col" style={{width: "6%"}}>Action</th>
                                                 </tr>
@@ -238,12 +238,12 @@ const viewPurchase = (res)=>{
                                                     </td>
                                                     }
 
-                                                        <td>{res.rows.map(list=>list.producttype)[0]}</td>
+                                                        <td>{res.producttype}</td>
 
                                                         <td><div>{res.rows.map(list=>list.quantity).reduce((a,b) =>a+b)}</div></td>
                                                         
 
-                                                        <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td>
+                                                        {/* <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td> */}
 
                                                         
                                                         <td><div>{new Date(res.dateofpurchase).toLocaleString()}</div></td>
@@ -312,7 +312,7 @@ const viewPurchase = (res)=>{
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=> list.rows.map(qua=> qua.quantity).reduce((a,b)=> Number(a) + Number(b) )).reduce((a,b)=> {return Number(a) + Number(b)}, 0)}</td>  
-                                                    <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>
+                                                    {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                     <td></td>
                                                  </tr>

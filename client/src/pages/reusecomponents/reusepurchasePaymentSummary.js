@@ -163,7 +163,7 @@ const ReusePurchasePaymentsummary = (params) => {
                         <div className="col-sm-4">
                             <div className="d-flex">
                                 <div className="search-box">
-                                    <input type="text" className="form-control" id="searchMemberList" placeholder="Search for invoiceNo or Client" name='search' onChange={(e)=>setSearch(e.target.value)} />
+                                    <input type="text" className="form-control" id="searchMemberList" placeholder="Search for invoiceNo or Company" name='search' onChange={(e)=>setSearch(e.target.value)} />
                                     <i className="las la-search search-icon"></i>
                                 </div>
                            </div>
@@ -191,7 +191,7 @@ const ReusePurchasePaymentsummary = (params) => {
                                                 <tr className="text-muted text-uppercase">
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Invoice ID</th>
-                                                    <th scope="col">Client</th>
+                                                    <th scope="col">Company</th>
                                                     <th scope="col">Billed</th>
                                                     <th scope="col" style={{width: "16%"}}>Payment Type</th>
                                                     <th scope="col" style={{width: "12%"}}>Action</th>

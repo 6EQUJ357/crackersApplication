@@ -235,7 +235,7 @@ const ReuseUsers = (params) => {
 
                     <div className="row pb-4 gy-3">
                         <div className="col-sm-4">
-                            <button className="btn btn-primary addPayment-modal" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i className="las la-plus me-1"></i> Add New</button>
+                            <button className="btn btn-primary addPayment-modal" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i className="las la-plus me-1"></i> Add User</button>
                         </div>
 
                         <div className="col-sm-auto ms-auto">

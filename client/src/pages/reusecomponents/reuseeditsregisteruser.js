@@ -31,14 +31,14 @@ const Reuseeditsregisteruser = (params) => {
 
     const formik = useFormik({
         initialValues : {
-            editregisterusergstno : registeruserData.registerusergstno,
+            editregisterusergstno : null,
             editregisterusername : registeruserData.registerusername,
             editregisteruseremail : registeruserData.registeruseremail,
             editregisterusernumber : registeruserData.registerusernumber,
             editregisteruseraddress : registeruserData.registeruseraddress
         },
         validationSchema:Yup.object({
-            editregisterusergstno : Yup.string().required("Enter GST Number"),
+            // editregisterusergstno : Yup.string().required("Enter GST Number"),
             editregisterusername : Yup.string().required("Name Required"),
             editregisteruseremail : Yup.string().required("Type Required"),
             editregisterusernumber : Yup.string().required("Price Required"),
@@ -112,12 +112,12 @@ const Reuseeditsregisteruser = (params) => {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 className="mb-sm-0">Update User</h4>
+                                <h4 className="mb-sm-0">Update Customer</h4>
 
                                 <div className="page-title-right">
                                     <ol className="breadcrumb m-0">
-                                        <li className="breadcrumb-item"><a href='#a'>User</a></li>
-                                        <li className="breadcrumb-item active">Update User</li>
+                                        <li className="breadcrumb-item"><a href='#a'>Customer</a></li>
+                                        <li className="breadcrumb-item active">Update Customer</li>
                                     </ol>
                                 </div>
 
@@ -130,7 +130,7 @@ const Reuseeditsregisteruser = (params) => {
                     <div className="row">
 
                     <div className="col-sm-4">
-                            <Link to="/registeruser" className="btn btn-primary addtax-modal"> Go To Register User</Link>
+                            <Link to="/registeruser" className="btn btn-primary addtax-modal"> Go To Register Customer</Link>
                             </div>
                         <div className="col-xl-12">
                             <div className="card">
@@ -141,33 +141,35 @@ const Reuseeditsregisteruser = (params) => {
                                     <form onSubmit={formik.handleSubmit}>
                                         
                                     <div className="row">
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                             <div className="mb-3">
                                                 <label className="form-label" for="productid">GST Number</label>
                                                 <input id="productid" name="editregisterusergstno" placeholder="#GST Number" type="text" className="form-control" {...formik.getFieldProps("editregisterusergstno")}/>
                                                 {formik.errors.editregisterusergstno ? <small style={{color:"red"}}>{formik.errors.editregisterusergstno}</small> : null}
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="col-lg-6">
                                             <div className="mb-3">
-                                                <label className="form-label" for="productname">Name</label>
+                                                <label className="form-label" for="productname">Customer Name</label>
                                                 <input id="productname" name="editregisterusername" placeholder="Enter Name" type="text" className="form-control" {...formik.getFieldProps("editregisterusername")}/>
                                                 {formik.errors.editregisterusername ? <small style={{color:"red"}}>{formik.errors.editregisterusername}</small> : null}
                                             </div>
                                         </div>
-                                       
-                                    </div>
-                                        
-                                        <div className="row">
-                                            <div className="col-md-6">
+
+                                        <div className="col-md-6">
                                                 <div className="mb-3">
                                                     <label className="form-label" for="product type">Email</label>
                                                         <input id="product type" name="editregisteruseremail"  type="email" className="form-control" {...formik.getFieldProps("editregisteruseremail")} placeholder="Enter Email"/>
                                                         {formik.errors.editregisteruseremail ? <small style={{color:"red"}}>{formik.errors.editregisteruseremail}</small> : null}
 
                                                 </div>
-                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                        
+                                        <div className="row">
+                                            
 
                                             <div className="col-lg-6">
                                                 <div className="mb-3">
@@ -189,7 +191,7 @@ const Reuseeditsregisteruser = (params) => {
                                         </div>
 
                                         <div className="hstack gap-2 mt-4">
-                                        <button type="submit" className="btn btn-primary">Update</button>
+                                        <button type="submit" className="btn btn-primary">Update Customer</button>
                                     </div> 
                                     </form>
 

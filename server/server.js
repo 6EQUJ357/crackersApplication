@@ -193,7 +193,7 @@ app.delete("/deleteuserdetails/:id", async(req,res)=>{
                 if (!updatedUser) { 
                   return res.status(404).json({ message: 'Error for Update  Client' });
                  }
-                 return res.send({status: 200, message: "User Profile Updated successsfull..."});
+                 return res.send({status: 200, message: "User Profile Updated successsfull..."}); 
                });
              
              
@@ -276,7 +276,7 @@ app.post("/signin", async(req,res)=>{
                 id : exist.id 
             }
         }
-        jwt.sign(payload, JWT_SECRET_KEY, {expiresIn:"1d"}, (err,token)=>{ 
+        jwt.sign(payload, JWT_SECRET_KEY, {expiresIn:"1d"}, (err,token)=>{  
             if(err) {
                 console.log(err)
             }

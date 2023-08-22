@@ -29,7 +29,7 @@ const ReuseRegisterUser = (params) => {
         initialValues : {
            userimg : null,
            imageURL: '',
-           registerusergstno : "",
+           registerusergstno : null,
            registerusername : "",
            registeruseremail : "",
            registerusernumber : "",
@@ -44,11 +44,12 @@ const ReuseRegisterUser = (params) => {
             //   value && value.size <= 1024 * 1024
             // ),
         
-            registerusergstno : Yup.string(),
+            // registerusergstno : Yup.string(),
             registerusername : Yup.string(),
             registeruseremail : Yup.string().required("Email Required"),
             registerusernumber :  Yup.string(),
             registeruseraddress: Yup.string()
+            
         }),
         onSubmit : async(values, {resetForm})=>{
             //console.log("valuesfdbgb", values)
@@ -68,22 +69,22 @@ const ReuseRegisterUser = (params) => {
         }
     })
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        formik.setFieldValue('userimg', file);
+    // const handleImageChange = (event) => {
+    //     const file = event.target.files[0];
+    //     formik.setFieldValue('userimg', file);
       
-        // Create a URL for the selected image
+    //     // Create a URL for the selected image
 
-        if (file && file.size <= 1024 * 1024) {
-            formik.setFieldValue('userimg', file);
+    //     if (file && file.size <= 1024 * 1024) {
+    //         formik.setFieldValue('userimg', file);
         
-            const imageURL = URL.createObjectURL(file);
-            setImageURL(imageURL);
-          } else {
-            formik.setFieldValue('userimg', null);
-            setImageURL('');
-          }
-      };
+    //         const imageURL = URL.createObjectURL(file);
+    //         setImageURL(imageURL);
+    //       } else {
+    //         formik.setFieldValue('userimg', null);
+    //         setImageURL('');
+    //       }
+    //   };
 
       const [registeruserDetails, setRegisterUserdetails] = useState([]);
 
@@ -137,7 +138,7 @@ const ReuseRegisterUser = (params) => {
     //delete registeruser  details
 
     const deleteregisteruserhandle = (res)=>{
-        let response = window.confirm(`You Want Delete This User #${res.registerusername}`);
+        let response = window.confirm(`You Want Delete This Customer #${res.registerusername}`);
 
         if(response){
         axios.delete(`${API_BASE_URL}/deleteregisteruserdetails/${res._id}`).then(res=>setRegisterUserdetails(res.data)).catch(err => console.log(err))
@@ -218,12 +219,12 @@ const ReuseRegisterUser = (params) => {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 className="mb-sm-0">Client</h4>
+                                <h4 className="mb-sm-0">Customer</h4>
 
                                 <div className="page-title-right">
                                     <ol className="breadcrumb m-0">
-                                        <li className="breadcrumb-item"><a href="#a">Client</a></li>
-                                        <li className="breadcrumb-item active">Register User</li>
+                                        <li className="breadcrumb-item"><a href="#a">Customer</a></li>
+                                        <li className="breadcrumb-item active">Register Customer</li>
                                     </ol>
                                 </div>
 
@@ -233,8 +234,8 @@ const ReuseRegisterUser = (params) => {
                    {/* end page title */}
 
                     <div className="row pb-4 gy-3">
-                        <div className="col-sm-4">
-                            <button className="btn btn-primary addPayment-modal" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i className="las la-plus me-1"></i> Add Client</button>
+                        <div className="col-sm-4 w-50" >
+                            <button className="btn btn-primary addPayment-modal" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i className="las la-plus me-1"></i> Add Customer</button>
                             &emsp;
                             <Link to="/addinvoice" className="btn btn-primary addPayment-modal">Create New Invoice</Link>
 
@@ -246,7 +247,7 @@ const ReuseRegisterUser = (params) => {
                         <div className="col-sm-auto ms-auto">
                            <div className="d-flex gap-3">
                            <div className="search-box">
-                                <input type="text" className="form-control" placeholder="Search for name or designation..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
+                                <input type="text" className="form-control" placeholder="Search for Customer Name..." name="searchvendor" value={searchproduct} onChange={(e)=>setSearchproduct(e.target.value)}/>
                                 <i className="las la-search search-icon"></i>
                             </div>
                             {/* <div className="">
@@ -270,8 +271,8 @@ const ReuseRegisterUser = (params) => {
                                         <table className="table table-hover table-nowrap align-middle mb-0">
                                             <thead>
                                                 <tr className="text-muted text-uppercase">
-                                                    <th scope="col" style={{width:"19%"}}>GST Number</th>
-                                                    <th scope="col" style={{width:"19%"}}>Member Name</th>
+                                                    {/* <th scope="col" style={{width:"19%"}}>GST Number</th> */}
+                                                    <th scope="col" style={{width:"19%"}}>Customer Name</th>
                                                     <th scope="col" style={{width:"19%"}}>Email</th>
                                                     <th scope="col" style={{width:"19%"}}>Mobile</th>
                                                     <th scope="col" style={{width:"19%"}}>Registered On</th>                                                  
@@ -282,7 +283,7 @@ const ReuseRegisterUser = (params) => {
                                             <tbody>
                                                 {currentData.length > 0 ? currentData.filter(list=>list.registerusername.toLowerCase().startsWith(searchproduct.toLowerCase())).map(res=>
                                                 <tr key={res._id}>
-                                                    <td>{res.registerusergstno}</td>
+                                                    {/* <td>{res.registerusergstno}</td> */}
                                                     <td>{res.registerusername}</td>
                                                     {/* <td> <img src="assets/images/users/avatar-1.jpg" alt="" className="avatar-xs rounded-circle me-2" /> 
                                                         <a href='#a' className="text-body align-middle fw-medium">{res.registerusername}</a>
@@ -321,7 +322,7 @@ const ReuseRegisterUser = (params) => {
                                                 )
                                                 :
                                                 <tr>
-                                                    <td><p style={{fontWeight:"bolder"}}>No Client Data Found...</p></td>
+                                                    <td><p style={{fontWeight:"bolder"}}>No Customer Data Found...</p></td>
                                                 </tr>
                                                 }
                                                 
@@ -610,7 +611,7 @@ const ReuseRegisterUser = (params) => {
         <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content border-0">
                 <div className="modal-header p-4 pb-0">
-                    <h5 className="modal-title" id="createMemberLabel">Add User</h5>
+                    <h5 className="modal-title" id="createMemberLabel">Add Customer</h5>
                     <button type="button" className="btn-close" id="createMemberBtn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body p-4">
@@ -642,16 +643,16 @@ const ReuseRegisterUser = (params) => {
                                 </div> */}
                                 {/* {(formik.touched.userimg && formik.errors.userimg) ? <small style={{color:"red"}}>{formik.errors.userimg}</small> : null} */}
 
-                                <div className="mb-3 mt-4">
+                                {/* <div className="mb-3 mt-4">
                                     <label htmlFor="teammembersgst" className="form-label">GST Number</label>
                                     <input type="text" className="form-control" id="teammembersgst" placeholder="#GST Number" name='registerusergstno' value={formik.values.registerusergstno} onChange={formik.handleChange} />
                                     <div className="invalid-feedback">Please Enter a member name.</div>
-                                </div>
+                                </div> */}
                                 {/* {(formik.touched.registerusergstno && formik.errors.registerusergstno) ? <small style={{color:"red"}}>{formik.errors.registerusergstno}</small> : null} */}
 
                                 <div className="mb-3 mt-4">
-                                    <label htmlFor="teammembersName" className="form-label">Client Name</label>
-                                    <input type="text" className="form-control" id="teammembersName" placeholder="Enter Name" name='registerusername' value={formik.values.registerusername} onChange={formik.handleChange} />
+                                    <label htmlFor="teammembersName" className="form-label">Customer Name</label>
+                                    <input type="text" className="form-control" id="teammembersName" placeholder="Enter Customer Name" name='registerusername' value={formik.values.registerusername} onChange={formik.handleChange} />
                                     <div className="invalid-feedback">Please Enter a member name.</div>
                                 </div>
                                 {/* {(formik.touched.registerusername && formik.errors.registerusername) ? <small style={{color:"red"}}>{formik.errors.registerusername}</small> : null} */}
@@ -679,7 +680,7 @@ const ReuseRegisterUser = (params) => {
 
                                 <div className="hstack gap-2 justify-content-end">
                                     <button type="button" className="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" className="btn btn-success" id="addNewMember">Add User</button>
+                                    <button type="submit" className="btn btn-success" id="addNewMember">Add Customer</button>
                                 </div>
                             </div>
                         </div>

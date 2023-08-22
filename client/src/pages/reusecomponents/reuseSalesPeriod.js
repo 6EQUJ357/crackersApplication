@@ -397,11 +397,11 @@ const handleFilteryear = ()=>{
                                                         </div>
                                                     </th> */}
                                                     <th scope="col">Invoice ID</th>
-                                                    <th scope="col">Client</th>
+                                                    <th scope="col">Customer</th>
                                                     <th scope="col" style={{width: "20%"}}>Email</th>
                                                     <th scope="col">Date</th>
                                                     <th scope="col">Billed</th>
-                                                    <th scope="col">Output Tax</th>
+                                                    {/* <th scope="col">Output Tax</th> */}
                                                     {/* <th scope="col" style={{width: "16%"}}>Status</th> */}
                                                     <th scope="col" style={{width: "12%"}}>Action</th>
                                                 </tr>
@@ -424,7 +424,7 @@ const handleFilteryear = ()=>{
                                                     <td>{res.vendoremail}</td>
                                                     <td>{res.dateofpurchase}</td>
                                                     <td>{res.totalAmount}</td>
-                                                    <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td>
+                                                    {/* <td>{res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))}</td> */}
                                                     {/* <td><span className="badge badge-soft-success p-2">{res.paymentstatus}</span></td> */}
                                                     <td>
                                                         <div className="dropdown">
@@ -475,7 +475,7 @@ const handleFilteryear = ()=>{
                                                     <td></td>
                                                     <td></td>
                                                     <td>{(currentData.map(list=> list.totalAmount).reduce((a,b)=> {return Number(a) + Number(b)}, 0)).toFixed(3)}</td> 
-                                                    <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td>
+                                                    {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                  </tr>
                                                 } 

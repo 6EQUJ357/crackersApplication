@@ -170,7 +170,7 @@ const ReuseEditProduct = (params) => {
                     <div className="row">
 
                     <div className="col-sm-4">
-                            <Link to="/productlist" className="btn btn-primary addtax-modal"> Go To List</Link>
+                            <Link to="/productlist" className="btn btn-primary addtax-modal"> Go To Product List</Link>
                             </div>
                         <div className="col-xl-12">
                             <div className="card">

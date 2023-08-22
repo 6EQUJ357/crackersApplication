@@ -319,7 +319,7 @@ const viewPurchase = (res)=>{
                                                     </td>
                                                     }
 
-                                                        <td>{res.rows.map(list=>list.producttype)[0]}</td>
+                                                        <td>{res.producttype}</td>
                                                         
 
                                                         <td><div>{res.rows.map(list=>Number(list.quantity)).reduce((a,b) =>a+b)}</div></td>
@@ -497,7 +497,7 @@ const viewPurchase = (res)=>{
                                                     </td>
                                                     }
 
-                                                        <td>{res.rows.map(list=>list.producttype)[0]}</td>
+                                                        <td>{res.producttype}</td>
 
                                                         <td><div>{res.rows.map(list=>Number(list.quantity)).reduce((a,b) =>a+b)}</div></td>
                                                         

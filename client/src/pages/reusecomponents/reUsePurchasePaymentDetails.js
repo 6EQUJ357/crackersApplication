@@ -169,15 +169,15 @@ const ReusePurchasePaymentdetails = (params) => {
                                             <div className="col-lg-4 col-4">
                                                 <div className="mt-sm-0 mt-3">
                                                     <p> <span className='c_profile_invoicedetaikls_name '>{params.value3?.[0].company_name}</span></p>
-                                                    <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p>
+                                                    {/* <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p> */}
+                                                    <p className="c_profile_invoicedetaikls_name" id="address-details">{params.value3?.[0].address}</p>
 
                                                 </div>
                                             </div>
 
                                             <div className="col-lg-4 col-4">
                                                 <div className="mt-sm-0 mt-3">
-                                                <h6 className="text-muted text-uppercase fw-semibold">Address</h6>
-                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+                                                {/* <h6 className="text-muted text-uppercase fw-semibold">Address</h6> */}
                                                     
                                                     <h6><span className="text-muted fw-normal">Email : </span><span id="email">{params.value3?.[0].email}</span></h6>
                                                     
@@ -195,8 +195,8 @@ const ReusePurchasePaymentdetails = (params) => {
                                             <h3 className="fw-bold mb-4">Invoice No : {filterData.purchaseno}</h3>
                                             <div className="row g-4">
                                                 <div className="col-lg-4 col-4">
-                                                    <p className=" mb-1 text-uppercase fw-bold fs-14">Vendor Name : {filterData.vendorname}</p>
-                                                    <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {filterData.vendorGSTno}</span></h5>
+                                                    <p className=" mb-1 text-uppercase fw-bold fs-14">Company Name : {filterData.vendorname}</p>
+                                                    {/* <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {filterData.vendorGSTno}</span></h5> */}
                                                 </div>
                                                 {/*end col*/}
                                                 <div className="col-lg-4 col-4">
@@ -258,9 +258,9 @@ const ReusePurchasePaymentdetails = (params) => {
                                                                 <th scope="col" style={{width:"80px"}}>Rate</th>
                                                                 <th scope="col" style={{width:"80px"}}>Quantity</th>
                                                                 <th scope="col" style={{width:"80px"}}>Amount</th> 
-                                                                <th scope="col" style={{width:"80px"}}>Tax (%)</th>
+                                                                {/* <th scope="col" style={{width:"80px"}}>Tax (%)</th>
                                                                 <th scope="col" style={{width:"10px"}}>Taxable Amount</th>
-                                                                <th scope="col" style={{width:"10px"}} className="text-end">HSN Code</th>
+                                                                <th scope="col" style={{width:"10px"}} className="text-end">HSN Code</th> */}
                                                                 
                                                             </tr>
                                                         </thead>
@@ -275,9 +275,9 @@ const ReusePurchasePaymentdetails = (params) => {
                                                                 <td>{res.productprice}</td> 
                                                                 <td>{res.quantity}</td>
                                                                 <td>{res.amount}</td>
-                                                                <td>{res.tax}</td>
+                                                                {/* <td>{res.tax}</td>
                                                                 <td>{res.taxableAmount}</td>
-                                                                <td className="text-end">{res.hsncode}</td>
+                                                                <td className="text-end">{res.hsncode}</td> */}
                                                             </tr>
                                                             )}
                                                           
@@ -288,7 +288,7 @@ const ReusePurchasePaymentdetails = (params) => {
                                                 <div className="border-top border-top-dashed mt-2">
                                                     <table className="table table-borderless table-nowrap align-middle mb-0 ms-auto" style={{width: "250px"}}>
                                                         <tbody>
-                                                            <tr>
+                                                            {/* <tr>
                                                                 <td>Sub Total</td>
                                                                 <td className="text-end">{filterData.subtotal}</td>
                                                             </tr>
@@ -299,7 +299,7 @@ const ReusePurchasePaymentdetails = (params) => {
                                                             <tr>
                                                                 <td>CGST (%)<small className="text-muted"></small></td>
                                                                 <td className="text-end">{filterData.CGST}</td>
-                                                            </tr>
+                                                            </tr> */}
                                                             
                                                             <tr className="border-top border-top-dashed fs-15">
                                                                 <th scope="row">Total Amount</th>

@@ -59,7 +59,7 @@ const ReuseAddInvoice = (params) => {
         paymentstatus : "",
         lotnumber : "",
         vendorname : "",
-        vendorGSTno : "",
+        vendorGSTno : null,
         vendoremail : "",
         vendornumber : "",
         vendoraddress : "",
@@ -81,7 +81,7 @@ const ReuseAddInvoice = (params) => {
         paymentstatus : Yup.string().required("Select Payment Status"),
         lotnumber : Yup.string(),
         vendorname : Yup.string().required("Name Required"),
-        vendorGSTno: Yup.string().required("Enter GST no"),
+        // vendorGSTno: Yup.string().required("Enter GST no"),
         vendoremail : Yup.string().required("Email Required"),
         vendornumber : Yup.string().required("Number Required"),
         vendoraddress : Yup.string().required("Address Required"),
@@ -539,7 +539,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                                         {registeruser.map((list)=>
                                                                         <option key={list._id} value={list.registerusername}>{list.registerusername}</option>)}
                                                                         </datalist>  */}
-                                                        <label>Company Name</label>
+                                                        <label>Customer Name</label>
                                                         <select className="form-control bg-light border-0" id="vendorname"  name="vendorname" onChange={changes} >
                                                             <option>-- Select -- </option>
                                                             {registeruser.length > 0 && registeruser.map((res)=>
@@ -553,20 +553,20 @@ const handlePaymentMethodOnCash = (e)=>{
 
                                                     <div className='col-lg'>
                                                         <br/>
-                                                        <Link to="/registeruser" className='btn btn-primary'>Add New Client</Link>
+                                                        <Link to="/registeruser" className='btn btn-primary'>Add New Customer</Link>
                                                     </div>
 
                                                 </div>
  
                                                
-                                                <div className="mb-2">
+                                                {/* <div className="mb-2">
                                                     <input className="form-control bg-light border-0" id="vendorGSTno"  name="vendorGSTno" placeholder="GST no" {...formik.getFieldProps("vendorGSTno")} readOnly/>
                                                     <div className="invalid-feedback">
                                                         Please enter GST no
                                                     </div>
                                                     {(formik.touched.vendorGSTno && formik.errors.vendorGSTno) ? <small style={{color:"red"}}>{formik.errors.vendorGSTno}</small> : null}
 
-                                                </div>
+                                                </div> */}
 
 
                                                 {/* <div>
@@ -785,7 +785,7 @@ const handlePaymentMethodOnCash = (e)=>{
                                                         </td>
                                                         
                                                         <td >
-                                                        <div className="input-step w-75" > 
+                                                        <div className="input-step w-100" > 
                                                         <input type="text" className="form-control product-price  border-0 product_name" id="productRate-1" placeholder='0' name={`rows[${index}].productprice`} value={row.productprice}  onChange={(e) => handleInputChange(e, index)} readOnly />
                                                             <div className="invalid-feedback"> 
                                                                 Please enter a rate
@@ -797,9 +797,9 @@ const handlePaymentMethodOnCash = (e)=>{
                                                         </td>
 
                                                         <td>
-                                                            <div className="input-step w-75"> 
+                                                            <div className="input-step section_width"> 
                                                                 {/* <button type="button" className='minus' onClick={()=>decrementquantity(index)}>–</button> */}
-                                                                <input type="text" className="product-quantity product_name" id="product-qty-1"  name={`rows[${index}].quantity`} value={row.quantity} onChange={(e) => handleAmountChange(e, index)}/>
+                                                                <input style={{width:"100%"}} type="text" className="product-quantity product_name" id="product-qty-1"  name={`rows[${index}].quantity`} value={row.quantity} onChange={(e) => handleAmountChange(e, index)}/>
                                                                 {/* <button type="button" className='plus'onClick={()=>incrementquantity(index)}>+</button> */}
                                                                     {/* {formik.errors.rows && formik.errors.rows[index]?.quantity && (
                                                                             <div>{formik.errors.rows[index].quantity}</div>
@@ -808,8 +808,8 @@ const handlePaymentMethodOnCash = (e)=>{
                                                         </td>
                                                        
                                                         <td className="text-start">
-                                                            <div className="input-step w-100">
-                                                            <input type="text" className=" form-control  border-0 product-line-price "  id="productPric-1" placeholder="₹0.00" readOnly = "readonly" name={`rows[${index}].amount`} value={row.amount}  onChange={(e) => handleInputChange(e, index)}/>
+                                                            <div className="input-step section_width" >
+                                                            <input style={{width:"100%"}} type="text" className=" form-control  border-0 product-line-price section_width_inner"  id="productPric-1" placeholder="₹0.00" readOnly = "readonly" name={`rows[${index}].amount`} value={row.amount}  onChange={(e) => handleInputChange(e, index)}/>
                                                             </div>
                                                         </td>
                                                         {/* <td className="text-end">

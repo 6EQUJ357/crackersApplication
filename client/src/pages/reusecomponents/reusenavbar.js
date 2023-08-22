@@ -1,6 +1,5 @@
 import React from 'react'
-import Sidebar from '../components/sidebar'
-import {useNavigate, Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import API_BASE_URL from '../components/config'
 
 
@@ -13,6 +12,7 @@ const Reusenavbar = (params) => {
       navigate("/viewuser", {state : data})
   }
 
+ 
   
  
   return (  
@@ -60,7 +60,7 @@ const Reusenavbar = (params) => {
                         </div>
                         } */}
 
-                        {/* <button type="button" className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon" >
+                        {/* <button type="button" className="btn btn-sm px-3 fs-16 ">
                             <span className="hamburger-icon">
                                 <span></span>
                                 <span></span>

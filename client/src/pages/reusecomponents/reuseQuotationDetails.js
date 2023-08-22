@@ -157,8 +157,8 @@ const ReuseQuotationdetails = (params) => {
                                             <div className="col-lg-4 col-4">
                                                 <div className="mt-sm-0 mt-3">
                                                     <p> <span className='c_profile_invoicedetaikls_name '>{params.value3?.[0].company_name}</span></p>
-                                                    <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p>
-                                                    <p className="text-muted mb-1" id="address-details">{params.value3?.[0].address}</p>
+                                                    {/* <p className="text-muted mb-1" id="zip-code"><span>GST No : </span> {params.value3?.[0].GST_No}</p> */}
+                                                    <p className="c_profile_invoicedetaikls_name" id="address-details">{params.value3?.[0].address}</p>
 
 
                                                 </div>
@@ -184,7 +184,7 @@ const ReuseQuotationdetails = (params) => {
                                          <div className="row g-4">
                                              <div className="col-lg-4 col-4">
                                                  <p className="mb-1 text-uppercase fw-medium fs-14">Customer Name : {quotationData.vendorname} </p>
-                                                 <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {quotationData.vendorGSTno}</span></h5>
+                                                 {/* <h5 className="fs-16 mb-0"><span id="invoice-no">GST No : {quotationData.vendorGSTno}</span></h5> */}
                                              </div>
                                              {/*end col*/}
                                              <div className="col-lg-4 col-4">

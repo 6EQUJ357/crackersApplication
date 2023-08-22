@@ -7,7 +7,7 @@ import API_BASE_URL from "./config.js";
 
 const Sidebar = (params) => {
   return (
-    <div  className='slidebarm'>
+    <div  className='slidebarm' >
 
          {/* LOGO */}
          {params.value3 &&
@@ -39,11 +39,13 @@ const Sidebar = (params) => {
                 </button>
             </div>
         }
-        <div id="scrollbar">
-                <div className="container-fluid" >
+        <div id="scrollbar" >
+                <div className="container-fluid scrollBar_Style" >
 
                     <div id="two-column-menu">
                     </div>
+
+                   
                     <ul className="navbar-nav" id="navbar-nav">
                         <li className="menu-title"><span data-key="t-menu">Menu</span></li>
                         <li className="nav-item">
@@ -52,26 +54,26 @@ const Sidebar = (params) => {
                             </Link>
                         </li>
 
-                        <li className="menu-title"><i className="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
+                        {/* <li className="menu-title"><i className="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li> */}
 
                         <li className="nav-item">
-                            <a className="nav-link menu-link" href="#sidebarInvoiceManagement" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarInvoiceManagement">
+                            {/* <a className="nav-link menu-link" href="#sidebarInvoiceManagement" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarInvoiceManagement">
                                 <i className="las la-file-invoice"></i> <span data-key="t-invoices">Invoices Management </span>
-                            </a>
-                            <div className="collapse menu-dropdown" id="sidebarInvoiceManagement">
+                            </a> */}
+                            {/* <div className="collapse menu-dropdown" id="sidebarInvoiceManagement"> */}
                                 <ul className="nav  flex-column">  {/* nav-sm */}
                                     <li className="nav-item">
-                                        <Link to="/invoice" className="nav-link" data-key="t-invoice"><i className="las la-file-invoice"></i> Invoice </Link>
+                                        <Link to="/invoice" className="nav-link" data-key="t-invoice"><i className="las la-file-invoice"></i> All Invoice </Link>
                                     </li>
 
                                     {params.value1.userType !== "user" && 
                                     <li className="nav-item">
-                                        <Link to="/addinvoice" className="nav-link" data-key="t-add-invoice"><i className="las la-receipt"></i> Add Invoice </Link>
+                                        <Link to="/addinvoice" className="nav-link" data-key="t-add-invoice"><i className="las la-receipt"></i> Create Invoice </Link>
                                     </li>
                                     }
 
                                     <li className="nav-item">
-                                        <Link to="/registeruser" className="nav-link" data-key="t-users"><i className="las la-user"></i> Client/Customer</Link>
+                                        <Link to="/registeruser" className="nav-link" data-key="t-users"><i className="las la-user"></i> Customers</Link>
                                     </li>
 
                                     <li className="nav-item">
@@ -158,7 +160,7 @@ const Sidebar = (params) => {
                                                 </li>
 
                                                 <li className="nav-item">
-                                                    <Link to="/clientwisesalereport" className="nav-link" data-key="t-sale-report"><i className="las la-database"></i> Client Wise Sale Report </Link>
+                                                    <Link to="/clientwisesalereport" className="nav-link" data-key="t-sale-report"><i className="las la-database"></i> Customer Wise Sale Report </Link>
                                                 </li>
 
                                                 <li className="nav-item">
@@ -171,7 +173,7 @@ const Sidebar = (params) => {
 
 
                                                 <li className="nav-item">
-                                                <Link to="/clientwisepurchasereport" className="nav-link" data-key="t-sale-report"><i className="las la-database"></i> Client Wise Purchase Report </Link>
+                                                <Link to="/clientwisepurchasereport" className="nav-link" data-key="t-sale-report"><i className="las la-database"></i> Company Wise Purchase Report </Link>
                                                 </li>
 
                                                 <li className="nav-item">
@@ -220,7 +222,7 @@ const Sidebar = (params) => {
                                     }
                                     
                                 </ul>
-                            </div>
+                            {/* </div> */}
                         </li>
 
                         {/* <li className="nav-item">
@@ -604,6 +606,8 @@ const Sidebar = (params) => {
                         </div> */}
 
                     </ul>
+                   
+                    
                 </div>
                {/* Sidebar */}
             </div>

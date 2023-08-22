@@ -182,7 +182,7 @@ const [imageURL, setImageURL] = useState('');
 
                                         <div className="col-lg-6">
                                             <div className="mb-3">
-                                                <label className="form-label" for="productname">Name</label>
+                                                <label className="form-label" for="productname">User Name</label>
                                                 <input id="productname" name="editusername" placeholder="Enter Name" type="text" className="form-control" {...formik.getFieldProps("editusername")}/>
                                                 {formik.errors.editusername ? <small style={{color:"red"}}>{formik.errors.editusername}</small> : null}
                                             </div>
@@ -227,7 +227,7 @@ const [imageURL, setImageURL] = useState('');
                                         </div>                                      
 
                                         <div className="hstack gap-2 mt-4">
-                                        <button type="submit" className="btn btn-primary">Update</button>
+                                        <button type="submit" className="btn btn-primary">Update User</button>
                                     </div> 
                                     </form>
 
