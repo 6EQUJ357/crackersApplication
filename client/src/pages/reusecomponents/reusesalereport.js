@@ -191,8 +191,8 @@ const ReuseSalereport = (params) => {
                                                     <th scope="col" style={{width:"30%"}}>Product Name</th>
                                                     <th scope="col"  style={{width: "20%"}}>Category</th>
                                                     {/* <th scope="col">No.Of Items</th> */}
-                                                    <th scope="col">Outward</th>
-                                                    {/* <th scope="col">OutPut Tax</th> */}
+                                                    <th scope="col">Outward(products)</th>
+                                                    <th scope="col">Billed</th>
                                                     <th scope="col" style={{width: "16%"}}>Date Of Update</th>
                                                     <th scope="col" style={{width: "6%"}}>Action</th>
                                                 </tr>
@@ -241,6 +241,7 @@ const ReuseSalereport = (params) => {
                                                     
 
                                                     <td><div>{res.rows.map(list=>Number(list.quantity)).reduce((a,b) =>a+b)}</div></td>
+                                                    <td><div>{res.totalAmount}</div></td>
 
 
                                                     {/* <td><div>{res.rows.map(list=>list.taxableAmount).reduce((a,b) =>Number(a)+Number(b))}</div></td> */}
@@ -310,6 +311,7 @@ const ReuseSalereport = (params) => {
                                                     <td></td>
                                                     <td></td>
                                                     <td>{currentData.map(list=> list.rows.map(qua=> qua.quantity).reduce((a,b)=> Number(a) + Number(b) )).reduce((a,b)=> {return Number(a) + Number(b)}, 0)}</td> 
+                                                    <td>{currentData.map(list=>list.totalAmount).reduce((a,b)=> (Number(a)+ Number(b)).toFixed(3))}</td>  
                                                     {/* <td>{ (currentData.map(res=>res.rows.map(list=>list.taxableAmount).reduce((a,b)=> Number(a)+ Number(b))) ).reduce((a,b)=>{return Number(a) + Number(b)}, 0)}</td> */}
                                                     <td></td>
                                                     <td></td>

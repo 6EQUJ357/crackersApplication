@@ -136,6 +136,43 @@ app.post("/muser",userUpload.single("userimg"), async(req,res)=>{
     }
 })
 
+
+//reset password
+
+app.put("/resetpassword/:id", async(req, res)=>{
+    try{
+        const {email, password} = req.body;
+
+        let exist = mcreate.findOne({email : email});
+        //console.log("wdefe", exist)
+        if(!exist){
+            return res.json({status:400, response : false, message:"user not found..."})
+        } 
+       
+         // Generate a salt
+         const salt = await bcrypt.genSalt(10);
+
+         // Generate bcrypt password hash
+         const hashedPassword = await bcrypt.hash(password, salt);
+
+         await mcreate.findByIdAndUpdate(req.params.id, { 
+            password : hashedPassword 
+        }, {new : true})
+        .then(updatedUser => {
+            if (!updatedUser) { 
+              return res.json({status : 400, message: 'Error While Update  Client' });
+             }
+             return res.send({status: 200, message: "Password Reset successsfull..."}); 
+           });
+
+    }catch(err){
+        console.log(err)
+        return res.status(500).send("internal server error...")
+    }
+})
+
+
+
 //get all users include admin
 app.get("/getallusers", async(req,res)=>{
     try{
@@ -218,17 +255,16 @@ app.put("/editadmindetails/:id",userUpload.single("userimg"), async(req,res)=>{
         images = req.file.filename;
          }
 
-        // Generate a salt
-    const salt = await bcrypt.genSalt(10);
+    //     // Generate a salt
+    // const salt = await bcrypt.genSalt(10);
 
-    // Generate bcrypt password hash
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // // Generate bcrypt password hash
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
         await mcreate.findByIdAndUpdate(req.params.id, {
             userimg : images,
             username : username,
-            email : email, 
-            password : hashedPassword
+            email : email 
         }, {new : true})
         .then(updatedUser => {
             if (!updatedUser) { 
@@ -428,7 +464,7 @@ app.delete("/deletecompanyprofiledata/:id",async(req,res)=>{
 
 //all protected routes
 
-app.get(["/dashboard", "/edituser", "/companyprofile", "/companyprofiledata", "/editcompanyprofiledata", "/invoice", "/addinvoice", "/inviocedetails", "/addproduct", "/productlist", "/editproduct", "/producttable", "/inventorytable", "/quotation", "/addquotation", "/quotationdetails", "/purchase", "/addpurchase", "/purchasedetails", "/salespayment", "/salespaymentdetails", "/purchasepayment", "/purchasepaymentdetails", "/taxes", "/users", "/salepaymentsummary", "/purchasepaymentsummary", "/salereport", "/clientwisesalereport", "/saleperiod", "/purchasereport", "/clientwisepurchasereport", "/purchaseperiod", "/expansesreport", "/transcationlist", "/newtranscation", "/viewcompanyprofiledata", "/viewproduct", "/registeruser", "/viewregisteruser", "/editregisteruser", "/viewuser", "/categories"], middleware1, async(req,res)=>{
+app.get(["/dashboard", "/edituser", "/companyprofile", "/companyprofiledata", "/editcompanyprofiledata", "/invoice", "/addinvoice", "/inviocedetails", "/addproduct", "/productlist", "/editproduct", "/producttable", "/inventorytable", "/quotation", "/addquotation", "/quotationdetails", "/purchase", "/addpurchase", "/purchasedetails", "/salespayment", "/salespaymentdetails", "/purchasepayment", "/purchasepaymentdetails", "/taxes", "/users", "/salepaymentsummary", "/purchasepaymentsummary", "/salereport", "/clientwisesalereport", "/saleperiod", "/purchasereport", "/clientwisepurchasereport", "/purchaseperiod", "/expansesreport", "/transcationlist", "/newtranscation", "/viewcompanyprofiledata", "/viewproduct", "/registeruser", "/viewregisteruser", "/editregisteruser", "/viewuser", "/categories", "/resetpassword"], middleware1, async(req,res)=>{
     try{
         let exist = await mcreate.findById(req.user.id)
         if(!exist){ 

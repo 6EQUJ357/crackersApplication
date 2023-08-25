@@ -8,9 +8,9 @@
 //const API_BASE_URL = "https://crakersapi.msoftweb.online";
 
 //render server end point (active)
-
-const API_BASE_URL = "https://crackers.onrender.com";     
  
+const API_BASE_URL = "https://crackers.onrender.com";     
+  
 //const API_BASE_URL = "https://api.saibalajifireworks.in";
  
 
